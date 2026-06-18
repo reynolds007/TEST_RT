@@ -1,4 +1,4 @@
-# === REGEX PATTERNS ===
+# === BACKDOOR REGEX PATTERNS ===
 regex:(?i)(?:^|[^\w])(jancox|boomnesia|togel|v3n0m\s*shell|agoy\s*haxor|paman\s*gober|CodeBoy1877|gacor|web_shell|c99shell|r57shell|Ghazascanner|hibikapalapi|FATHURFREAKZ|WebShellOrb|indoxploit|fvckowner|HENGKER\s*PESBUK|PHPJiaMi|D157ruck70r|wso_shell|b374k_shell|shin\s*code|tinyfilemanager|web\s*shell|botaxwebshell|8152413345|linuxploit)(?:$|[^\w])
 regex:(?i)\b(egre55\.com|ezz\.guru|br\.goog2|oke-gas\.xyz|listrik\.org|yuklink\.me|hso777\.xyz|bujang\.online|pgbos789th\.pages\.dev|bd888\.xyz|R00t-Shell\.com|changthai\.site|ylyl23\.com|egre55\.com|leafmailer\.pw|jan42\.tphu5583htr|kerjaan-serabutan-jangan-di-senggol\.pages\.dev)\b
 regex:(?i)(?:^|[^\w])(Simple\s*PHP\s*File\s*Manager|dadsec404R|Gel4y\s*Mini\s*Shell|DeckPHP\s*Beta|alfacgiapi|Tiny\s*File\s*Manager|HaxorWorld|SoP\s*Shell|solevisible|Priv8\s*Shell|FoxCyberSecurity)(?:$|[^\w])
@@ -27,11 +27,12 @@ regex:["']f["']\.["']u["']\.["']nctio["']\.["']n["']\.["']_["']\.["']e["']\.["']
 regex:eval\s*\(\s*(?:base64_decode|gzinflate|gzuncompress|str_rot13)\s*\(\s*["'][A-Za-z0-9+/=]{60,}
 regex:api\.telegram\.org/bot[A-Za-z0-9_]{10,}:[A-Za-z0-9_-]{30,}/send(?:Message|Document|Photo)
 regex:unserialize\s*\(\s*(?:base64_decode\s*\(|\$_(?:GET|POST|REQUEST|COOKIE|SESSION)\s*\[)
-regex:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*(?:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*){2,}
+# [HIGH-FP] 3+ short var assignments — matches config arrays, route definitions, form field maps
+# regex:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*(?:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*){2,}
 regex:<\?=\s*(?:base64_decode|gzinflate|gzuncompress|str_rot13|hex2bin|rawurldecode)\s*\(
 regex:eval\s*\(\s*\$\w+\s*\^\s*\$\w+\s*\)|(?:\$\w+\s*=\s*\$\w+\s*\^\s*\$\w+;\s*){2,}eval
 regex:(?:include|require|file_get_contents|fopen)\s*\([^)]*(?:\\x00|%00|\\0)[^)]*\.php
-regex:(?i)(?:Invoke-WebRequest|IWR|System\.Net\.WebClient|DownloadString|DownloadFile)
+regex:(?i)(?:Invoke-WebRequest|System\.Net\.WebClient|DownloadString|DownloadFile)
 regex:(?i)\$[a-zA-Z_ -藩][a-zA-Z0-9_ -藩]*\s*=\s*(['"])(e|a|s|v|l|t|p|r|c|o|m|n|d|x|i)+ 
 regex:(?:hex2bin|bin2hex)\s*\(\s*(?:strrev|str_rot13|rawurldecode|base64_decode)\s*\(
 regex:(?:gzinflate|gzuncompress|strrev|str_rot13)\s*\(\s*(?:base64_decode|gzinflate)
@@ -123,14 +124,16 @@ regex:(?i)subprocess\.(?:Popen|call|check_output|run)
 regex:shell_exec\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
 regex:(?i)pty\.spawn\s*\(\s*['"]/bin/(?:bash|sh)['"]
 regex:pack\s*\(\s*["']H\*["'],\s*str_rot13\s*\(\s*\$
-regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)
+# [HIGH-FP] function_exists('shell_exec') — server-capability checks in legitimate plugins/dashboards
+# regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)
 regex:eval\s*\(\s*\w+\s*\(\s*["'][A-Za-z0-9+/=]{6,}
 regex:gz(?:inflate|uncompress)\s*\(\s*base64_decode
 regex:dl\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
 regex:if\s*\(\s*\$_POST\[["']_upl["']\]\s*==\s*["']
 regex:eval\s*\(\s*(?:base64_decode|gzinflate)\s*\(
 regex:create_function\s*\(\s*["'][^"']*["']\s*,\s*
-regex:move_uploaded_file\s*\(\s*(?:\$_FILES|\$\w+)
+# [HIGH-FP] move_uploaded_file alone — hits every file upload form handler; narrowed version in HIGH-FP section below
+# regex:move_uploaded_file\s*\(\s*(?:\$_FILES|\$\w+)
 regex:(?:\$_[a-z]=['"][a-z0-9_]+['"]\s*;?\s*){10,}
 regex:hex2bin\s*\(\s*["'][0-9a-fA-F]{40,}["']\s*\)
 regex:new\s+COM\s*\(\s*['"]WScript\.Shell['"]\s*\)
@@ -156,17 +159,23 @@ regex:assert\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
 regex:readfile\s*\(\s*base64_decode\s*\(\s*["']
 regex:(?i)new\s+Function\s*\(\s*(?:req|request)
 regex:eval\s+\(\s*['"]?>\s*['"]?\.\s*\$\w+\s*\)
-regex:eval\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\)\s*\)
+# [HIGH-FP] eval($func($var)) — matches template engine patterns like eval($twig->render($x))
+# regex:eval\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\)\s*\)
 regex:_COOKIE\[["']user_id["']\]\s*===\s*["']
 regex:CONCAT\(0x[0-9a-f]+(?:,\s*0x[0-9a-f]+)+
-regex:\$\w+\s*\.=\s*["'][A-Za-z0-9+/=]+["'];?
+# [HIGH-FP] string concat — any-length base64-like chars; narrowed to 50+ chars in HIGH-FP section
+# regex:\$\w+\s*\.=\s*["'][A-Za-z0-9+/=]+["'];?
 regex:(?i)fsockopen\s*\(\s*(['"])(tcp|udp)://
-regex:hash\s*\(\s*["'](?:crc32|sha1|md5)["']
-regex:["']\w+["']==\s*\$_GET\[["']\w+["']\]
+# [HIGH-FP] hash('sha1'|'md5'|'crc32') — extremely common in legitimate WP code (password_hash alternatives, checksums)
+# regex:hash\s*\(\s*["'](?:crc32|sha1|md5)["']
+# [HIGH-FP] 'value'==$_GET['key'] comparison — common router/action dispatch pattern in plugins
+# regex:["']\w+["']==\s*\$_GET\[["']\w+["']\]
 regex:set_role\s*\(\s*["']administrator["']
 regex:eval\s*\(\s*base64_decode\s*\(\s*["']
-regex:(?:raw\.)?githubusercontent\.com/\w+
-regex:chr\(\d{2,3}\)\s*\.\s*chr\(\d{2,3}\)
+# [HIGH-FP] githubusercontent.com URL — duplicate of stricter line-40 pattern (which requires .php/.sh path); update checkers use raw GH
+# regex:(?:raw\.)?githubusercontent\.com/\w+
+# [HIGH-FP] only 2 chr() calls — too low threshold; use 4+ requirement in HIGH-FP section
+# regex:chr\(\d{2,3}\)\s*\.\s*chr\(\d{2,3}\)
 regex:eval\s*\(\s*\$_SERVER\s*\[["']HTTP_
 regex:<h3>Current Directory:\s*\$\w+</h3>
 regex:eval\s*\(\s*['"]?>['"]\s*\.\s*\$\w+
@@ -174,12 +183,14 @@ regex:isset\s*\(\s*\$_POST\[["']unlock_pw
 regex:decode_base64\s*\(\s*\$\w+\{["']cmd
 regex:eval\s*\(\s*["']\\\$\w+\s*=\s*\$\w+
 regex:(?i)disable_functions\s*=\s*(none)
-regex:<\?php\s+require_once\s*\(\s*["']
+# [HIGH-FP] require_once("string") — matches virtually every WordPress plugin/theme entry file
+# regex:<\?php\s+require_once\s*\(\s*["']
 regex:isset\s*\(\s*\$_POST\[["']dounzip
 regex:_GET\[["']Ghost["']\]\s*==\s*["']
 regex:eXtRaCt\s*\(\s*_{4}\s*\(\s*\$\w+
 regex:@copy\s*\(\s*\$_FILES\[["']file
-regex:function\s+\w{1,3}\s*\(\s*\$\w+
+# [HIGH-FP] 1–3 char function names — very common in utility code, WP shorthand helpers, Joomla, etc.
+# regex:function\s+\w{1,3}\s*\(\s*\$\w+
 regex:(?:pack\s*\(['"][Vv]['"].*){3,}
 regex:copy\s*\(\s*\$_FILES\[["']file
 regex:["']gzu["']\.["']ncompress["']
@@ -189,7 +200,8 @@ regex:isset\s*\(\s*\$_POST\[["']act
 regex:include\s*\(\s*base64_decode
 regex:zip->setPassword\s*\(\s*["']
 regex:\$GLOBALS\[[^\x00-\x7F\]]+\]
-regex:function\s+[A-Z][a-zA-Z]{8,}
+# [HIGH-FP] CamelCase functions 9+ chars — common in OOP/WooCommerce/Elementor/Jetpack
+# regex:function\s+[A-Z][a-zA-Z]{8,}
 regex:isset\s*\(\s*\$_GET\[["']cmd
 regex:\d{8,10}:AA[A-Za-z0-9_-]{33}
 regex:\$\w+\s*=\s*'gzuncompres[s']
@@ -197,7 +209,8 @@ regex:Array\s*\(\s*'co'\.'py'\s*\)
 regex:base64\.b64decode\s*\(\s*\w+
 regex:file\s*=\s*["']worksec\.php
 regex:eval\s*\(\s*<<<[A-Z_]{2,}\b
-regex:function\s+_[A-Za-z0-9]{4,}
+# [HIGH-FP] _-prefixed functions — WordPress core uses hundreds (_doing_it_wrong, _get_list_table, etc.)
+# regex:function\s+_[A-Za-z0-9]{4,}
 regex:@include\s*\(\s*["']\\057
 regex:sha1\s*\(\s*md5\s*\(\s*\$
 regex:include\s*\(\s*['"]zip://
@@ -210,12 +223,15 @@ regex:(?i)pickle\.loads\s*\(
 regex:GLOBALS["']\}\[["']\w+
 regex:<\?\s+\$GLOBALS\[["']_
 regex:zip->open\s*\(\s*["']
-regex:<\?php\s+include_once
+# [HIGH-FP] <?php include_once — matches first-line of nearly every WordPress theme/plugin file
+# regex:<\?php\s+include_once
 regex:login_pass\s*=\s*["']
 regex:\$_REQUEST\[["']exec
 regex:(?i)perl\s+-MIO\s+-e
-regex:\w+\s*\(\s*__FILE__
-regex:include\s*\(\s*["']
+# [HIGH-FP] func(__FILE__) — matches plugin_dir_path(__FILE__), dirname(__FILE__) — ubiquitous in WP
+# regex:\w+\s*\(\s*__FILE__
+# [HIGH-FP] include('string') — matches every static include path; line-49 already covers the dangerous include($GET) case
+# regex:include\s*\(\s*["']
 regex:\$_REQUEST\[["']cmd
 regex:goto\s+\w+;\s*\w+:
 regex:eval\s*\(\s*['"]?>
@@ -224,22 +240,56 @@ regex:eval\s*/\*[^*]*\*/
 regex:\$\w*hexurl\w*\s*=
 regex:<\?php\s+@require
 regex:eval\s*\(\s*\$\w+
-regex:mail\s*\(\s*\$\w+
-regex:type=["']file["']
+# [HIGH-FP] mail($var) — matches every contact form and notification plugin; line-69 already covers mail(stripslashes(base64_decode(...
+# regex:mail\s*\(\s*\$\w+
+# [HIGH-FP] type="file" — matches every HTML file-upload input in WooCommerce, forms, media plugins
+# regex:type=["']file["']
 regex:\$z\s*\.=\s*["']
 regex:atob\s*\(\s*["']
-regex:password = ["']
+# [HIGH-FP] password = "..." — matches password form fields, config defaults, i18n string keys
+# regex:password = ["']
 regex:eval\(['"]\?>
-regex:<\?php\s+/\*
+# [HIGH-FP] <?php /* — matches every well-commented PHP file (plugin headers, license blocks, etc.)
+# regex:<\?php\s+/\*
 regex:["']v3x3["']
 regex:<\?=\s*/\*+/
 regex:system\(\$_GET\[['"]cmd['"]\]\);
 regex:eval\(base64_decode\(\$_POST\[['"]cmd['"]\]\)\);
 regex:system\(\$_POST\[['"]cmd['"]\]\);
-regex:(?:function cgi_get_post_vars|webshell command executor|short-link-th\.pages\.dev|betem\.reversespell\.icu|file zip tidak ditemukan|simple php file manager|btuan04\.ytproduct\.top|fabricio seger kolling|githubusercontent\.com|simpleeeverything\.com|teamnoreal\.pages\.dev|gantidenganpasswordlu|backconnect bash-like|sniper404ghostxploit|obfuscation provided|file management tool|slaosai\.github\.io|paste\.myconan\.net|simple file manager|revision vinooo_sys|fm_upload_extension|haxor-research\.com|kelelawarcyberteam|berhasil terupload|berhasil diekstrak|enphp\.djunny\.com|xman php ver 1\.4|wp health monitor|7p3bcinlsickvdc22|tiny file manager|cannot create zip|godzilla webshell|downloadwithfopen|redirectseo\.icu|zerotwostrg\.xyz|marslogs\.co\.id|mailer by x-nero|7x1re9rgevdnnoc5|php file manager|foxcybersecurity|skk-shell-hunter|gel4y mini shell|ee434023cf89d7df|x-xss-protection|nanshan\.eu\.org|oslkhpzmgvzohyst|unknowndevice64|classiccartrust|tinyfilemanager|ahr0chm6ly9yyxc|leaf php mailer|r00t-shell\.com|alfa team shell|upload\.c99\.nl|function madrid|simple webshell|xploitid zatura|imeco-uae\.com|sorry,no files|php obfuscator|donat was here|757365725f6964|new ziparchive|trustsec0x0777|script kiddies|leafmailer\.pw|simpancom\.top|aslimenyalavip|0x00001bb;goto|antsword shell|tennc webshell|safe0ver shell|laudanum shell|behinder shell|add admin user|kingdefserver|obfuscated by|china chopper|by zeura\.com|zxzhbcuyocuyn|f-automatical|php encode by|wso_setcookie|gagal membuat|phpjiami\.com|r57shell\.net|c99shell\.com|shellc0de\.ru|weevely agent|login sukses|negat1ve1337|deckphp beta|adminer\.org|ghazascanner|fungsi untuk|jackal shell|ufa99ac\.com|ghostbin\.co|qqifquaqdzvp|worksec\.php|fathurfreakz|phpspy shell|7x1te9s2suh3|obfuscate by|hibikapalapi|ochoa shell|timtam\.rpl|egre55\.com|prinsh\.com|getbacklink|<\?php goto|webshellorb|tempuserpat|haxornoname|yrg0suiuhis|new wp_user|p0wny shell|sukajanda01|anonsecteam|filemanager|wso_version|d157ruck70r|sztdcduq53f|ahr0chm6ly9|uploader by|indoxploit|alfa shell|phpjm\.net|\.htaccess|rentry\.co|drunkshell|o000oo0o00|memek_cyna|seoteamddd|beritabaru|haxorshell|b374k\.net|ikanmujaer|vinooo_sys|uutool\.cn|hackersec|alfashell|shelby404|tenyom189|jagoan sl|spongebob|strezzboy|ichigo778|anon\.txt|bkv8\.txt|user\.ini|fx29shell|hacked by|bwphp\.cn|paste\.ee|lpsh\.net|marijuana|r57shell|c99shell|pwned by|phpjiami|php\.ini|unamexid|nyanpasu|wso_salt|m4ndzsec|nilam189|tds\.php|filesman|pastebin|con7ext|den1xxx|yak pro|by fopo|gai-seo|obz\.bz|dosasec|wso 2\.|ngentod|aptisme|xlist99|jembut|kuntul|zehir4|kontol|jancox|lonte|b374k|memek|avril|b1749)
-regex:(?:eval|assert|system|exec|shell_exec|passthru|popen|proc_open|pcntl_exec|copy|file_get_contents|file_put_contents|scandir|serialize|str_repeat|strlen|touch|base64_decode|gzinflate|gzuncompress|str_rot13|strrev)\s*\(
+regex:(?:function cgi_get_post_vars|webshell command executor|short-link-th\.pages\.dev|betem\.reversespell\.icu|file zip tidak ditemukan|simple php file manager|btuan04\.ytproduct\.top|fabricio seger kolling|githubusercontent\.com|simpleeeverything\.com|teamnoreal\.pages\.dev|gantidenganpasswordlu|backconnect bash-like|sniper404ghostxploit|obfuscation provided|file management tool|slaosai\.github\.io|paste\.myconan\.net|simple file manager|revision vinooo_sys|fm_upload_extension|haxor-research\.com|kelelawarcyberteam|berhasil terupload|berhasil diekstrak|enphp\.djunny\.com|xman php ver 1\.4|wp health monitor|7p3bcinlsickvdc22|tiny file manager|cannot create zip|godzilla webshell|downloadwithfopen|redirectseo\.icu|zerotwostrg\.xyz|marslogs\.co\.id|mailer by x-nero|7x1re9rgevdnnoc5|php file manager|foxcybersecurity|skk-shell-hunter|gel4y mini shell|ee434023cf89d7df|x-xss-protection|nanshan\.eu\.org|oslkhpzmgvzohyst|unknowndevice64|classiccartrust|tinyfilemanager|ahr0chm6ly9yyxc|leaf php mailer|r00t-shell\.com|alfa team shell|Alfa-Team|upload\.c99\.nl|function madrid|simple webshell|xploitid zatura|imeco-uae\.com|sorry,no files|php obfuscator|donat was here|757365725f6964|new ziparchive|trustsec0x0777|script kiddies|leafmailer\.pw|simpancom\.top|aslimenyalavip|0x00001bb;goto|antsword shell|tennc webshell|safe0ver shell|laudanum shell|behinder shell|add admin user|kingdefserver|obfuscated by|china chopper|by zeura\.com|zxzhbcuyocuyn|f-automatical|php encode by|wso_setcookie|gagal membuat|phpjiami\.com|r57shell\.net|c99shell\.com|shellc0de\.ru|weevely agent|login sukses|negat1ve1337|deckphp beta|adminer\.org|ghazascanner|fungsi untuk|jackal shell|ufa99ac\.com|ghostbin\.co|qqifquaqdzvp|worksec\.php|fathurfreakz|phpspy shell|7x1te9s2suh3|obfuscate by|hibikapalapi|ochoa shell|timtam\.rpl|egre55\.com|prinsh\.com|getbacklink|<\?php goto|webshellorb|tempuserpat|haxornoname|yrg0suiuhis|new wp_user|p0wny shell|sukajanda01|anonsecteam|filemanager|wso_version|d157ruck70r|sztdcduq53f|ahr0chm6ly9|uploader by|indoxploit|alfa shell|phpjm\.net|\.htaccess|rentry\.co|drunkshell|o000oo0o00|memek_cyna|seoteamddd|beritabaru|haxorshell|b374k\.net|ikanmujaer|vinooo_sys|uutool\.cn|hackersec|alfashell|shelby404|tenyom189|jagoan sl|spongebob|strezzboy|ichigo778|anon\.txt|bkv8\.txt|user\.ini|fx29shell|hacked by|bwphp\.cn|paste\.ee|lpsh\.net|marijuana|r57shell|c99shell|pwned by|phpjiami|php\.ini|unamexid|nyanpasu|wso_salt|m4ndzsec|nilam189|tds\.php|filesman|pastebin|con7ext|den1xxx|yak pro|by fopo|gai-seo|obz\.bz|dosasec|wso 2\.|ngentod|aptisme|xlist99|jembut|kuntul|zehir4|kontol|jancox|lonte|b374k|memek|avril|b1749)
+# [HIGH-FP] copy|file_get_contents|file_put_contents|scandir|serialize|str_repeat|strlen|touch|base64_decode|gzinflate|gzuncompress|str_rot13|strrev removed — too common in legitimate code
+# Use the narrowed version below that only matches dangerous execution sinks alone:
+regex:(?:eval|assert|system|exec|shell_exec|passthru|popen|proc_open|pcntl_exec)\s*\(
 
-# === LITERAL PATTERNS ===
+# === REGEX — HIGH FALSE POSITIVE RISK (score-reduce only; do NOT hard-block) ===
+# These patterns match both legitimate and malicious code.
+# Recommended: use as score-reducers or require corroboration from another pattern.
+
+# move_uploaded_file writing to .php extension — legitimate uploads go to upload dirs, not .php files
+regex:move_uploaded_file\s*\(\s*(?:\$_FILES\[["']\w+["']\]\[["']tmp_name["']\]|\$\w+)\s*,\s*[^,)]*\.php['")\s]
+
+# 5+ single/two-char variable assignments in sequence — classic obfuscation variable setup
+regex:\$\w+\s*=\s*["'][a-z0-9_]{1,2}["'];\s*(?:\$\w+\s*=\s*["'][a-z0-9_]{1,2}["'];\s*){4,}
+
+# Base64-like string chunk concatenation (50+ chars) — common in chunked payload assembly
+regex:\$\w+\s*\.=\s*["'][A-Za-z0-9+/=]{50,}["'];?
+
+# chr() concatenation chain 4+ calls — obfuscated string construction
+regex:chr\(\d{2,3}\)(?:\s*\.\s*chr\(\d{2,3}\)){3,}
+
+# function_exists('shell_exec') followed immediately by execution on same line
+regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)\s*(?:&&|\?\?|and)\s*shell_exec\s*\(
+
+# mail() called with direct user input (no sanitization wrapper)
+regex:mail\s*\(\s*\$_(?:POST|GET|REQUEST)\s*\[
+
+# <input type="file"> with a suspicious name attribute (shell/upload/file_upload)
+regex:type=["']file["'][^>]*name=["'](?:shell|cmd|upload|webshell|file_upload|payload|backdoor)["']
+
+# 3+ short var assignments (1–4 chars) — borderline; flag only if combined with other indicators
+# regex:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*(?:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*){2,}
+
+# === BACKDOOR LITERAL PATTERNS ===
 literal:$in{$key} .= $val;}if($in{"cmd"}){print decode_base64($in{"check"})."<pre>";system(decode_base64($in{"cmd"}));
 literal:<pre>#{ view.getclass().getclassloader().loadclass("java.util.scanner").getmethod("next").invoke(
 literal:if (strpos($_session['currentdir'],str_replace('\\','/',$_server['document_root'])) === false)
@@ -707,33 +757,6 @@ literal:打包完成
 literal:文件
 
 # WHITELIST / SKIP PATTERNS
-# TIER 0 — VERY SAFEST
-skip:cyberdarkrevolution
-skip:banditkocan
-skip:mbk55
-skip:tha555
-skip:rwy88
-skip:kha99
-skip:uvo88
-skip:ghdnqbrlfu
-skip:rpfstdmovq
-skip:luwwgqzmcm
-skip:xrvwlittge
-skip:ymvvxtjghw
-skip:azwpxeyspq
-skip:eltsyoqzhn
-skip:globals["fyyixgsvji"]('sfruufm
-skip:goto c0hoa2g; c0hoa2g: $rw5vzue
-skip:267e7f896b662b67e3b397adc1ad4027
-skip:globals["azcwkmoquz
-skip:ksoioac,$ewoqrfo,$wmfhecz
-skip:ulrwlayfzq"]=>$yo]]);exit;}ouerlytzfg
-skip:ehnawkvczv"]=>$gg]]);exit;}kszmyebxlg
-skip:ucnmtlfbeu($zyp);tlrvtyxrsb
-skip:pixgxkotwi($yy){if($globals["qecxffbjws
-skip:pacenxpxli($ul){if($globals["plmnvquuli
-skip:rakuzan666
-
 # TIER 1 — SAFEST
 skip:regex:\$table->(?:string|integer|bigInteger|boolean|text|timestamps|softDeletes|unsignedBigInteger|foreignId|increments|id)\s*\(
 skip:regex:\$this->(?:belongsTo|hasMany|hasOne|belongsToMany|hasManyThrough|morphTo|morphMany|morphOne)\s*\(
@@ -744,7 +767,6 @@ skip:regex:public\s+function\s+test[A-Z][a-zA-Z]+\s*\(
 skip:regex:declare\s*\(\s*strict_types\s*=\s*1\s*\)
 skip:regex:Symfony\\Component\\HttpClient
 skip:regex:Symfony\\Component\\Console
-skip:regex:CyberDark.*?Revolution
 
 # TIER 2 — VERY SAFE
 skip:regex:sanitize_(?:text_field|email|title|file_name|key|user_field|html_class|mime_type)\s*\(
