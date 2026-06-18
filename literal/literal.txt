@@ -354,7 +354,8 @@ literal:7zlrjppafizfwcz9h8mghcfnseq23spa
 literal:ueq5d2fiqwdawep5yjnkzmntvndim0ow
 literal:sy1lznfqt1dll7fw10uvks1lzs8tkeot
 literal:sy1lznfqt7dt10uvks1lzs8tkeotltzi
-literal:\x44\x4f\x43\x55\x4d\x45\x4e\x54
+# [HIGH-FP] decoded = "DOCUMENT" — matches DOMDocument, $document, documents in Elementor/WP Importer
+# literal:\x44\x4f\x43\x55\x4d\x45\x4e\x54
 literal:2gtcipomaac5krgibphtpwmduplkibos
 literal:wlhaagjdz25qejrutg1knmrxnwpimjf3
 literal:!isset($_post["\156\x67\141\x72\
@@ -401,13 +402,15 @@ literal:https://bypass.pw/raw/u5xpz0e
 literal:83a6ee9b34553e9cf5ef0c507270d
 literal:powershell -nop -exec bypass
 literal:<%=request.servervariables("
-literal:\x5f\x43\x4f\x4f\x4b\x49\x45
+# [HIGH-FP] decoded = "_COOKIE" — matches any PHP file using $_COOKIE superglobal
+# literal:\x5f\x43\x4f\x4f\x4b\x49\x45
 literal:position:absolute;left:-9999
 literal:ini_set('error_log', null);
 literal:4dyg1ydzgoofseewrws4akqaeik
 literal:wjjwmfftrnphv056u1c1bwj3pt0
 literal:uname -a; w; id; /bin/sh -i
-literal:\x3c\144\151\166\40\151\x64
+# [HIGH-FP] decoded = "<div id" — matches every <div id="..."> in any HTML/PHP template
+# literal:\x3c\144\151\166\40\151\x64
 literal:define('rnavkdih',__file__)
 literal:$dir=$_request["uploaddir"]
 literal:echo $cmd | base64 --decode
@@ -451,7 +454,8 @@ literal:pbfqhfcmdseuttguppndhsxmm
 literal:68747470733a2f2f616c66612
 literal:pd9wahancmhlywrlcignq29ud
 literal:fahlkpgghpidhkihiqhl0adn5
-literal:\x64\151\x72\156\141\x6d\
+# [HIGH-FP] decoded = "dirname" — matches every dirname(__FILE__), dirname(__DIR__) call
+# literal:\x64\151\x72\156\141\x6d\
 literal:3225416e6139337a364232256
 literal:%3c%73%63%72%69%70%74%20%
 literal:downloadwithfilegetconten
@@ -474,7 +478,8 @@ literal:7x3bcum4suc7vwkt9jtlozytw
 literal:awyoiwz1bmn0aw9ux2v4axn0c
 literal:zxzhbcuyocuynnf1b3qlm0ilm
 literal:atmkbcatmczkdbqjcgqsmuxsk
-literal:\x68\x74\x74\x70\x73\x3a\
+# [HIGH-FP] decoded = "https:" — matches every HTTPS URL in every plugin/theme
+# literal:\x68\x74\x74\x70\x73\x3a\
 literal:uwx9wglltpjuwurckmdmz2tmc
 literal:1756730583473454b4352506b
 literal:47364e4159463225414232257
@@ -493,7 +498,8 @@ literal:ueq5d2fiqwdawep5yjnkzmntv
 literal:pd9wahagjg9qndiyoca9icjwo
 literal:sy1lznfqt1dll7fw10uvks1lz
 literal:wdlyrqs3e1m3dydfrx7khux6p
-literal:\x53\x43\x52\x49\x50\x54\
+# [HIGH-FP] decoded = "SCRIPT" — matches every file with JavaScript or wp_enqueue_script()
+# literal:\x53\x43\x52\x49\x50\x54\
 literal:cnnlc3npb25fc3rhcnqoktskz
 literal:sy1lznfqt7dt10uvks1lzs8tk
 literal:vic2l0zsddpsjszwfmbwfpbgv
@@ -503,7 +509,8 @@ literal:\x77\157\x6e\x67\55\x74\x
 literal:x69\154\x65\144\40\x74\x6
 literal:qy+q2639fshx8d2y0k59rjiwo
 literal:icagicagicagicagicagicagi
-literal:\x5f\x67\x65\x74\x5f\x63\
+# [HIGH-FP] decoded = "_get_c" — matches WP functions like _get_cron_lock(), _get_dropins(), etc.
+# literal:\x5f\x67\x65\x74\x5f\x63\
 literal:aynpzphzlhsrgd6k0tor4arg7
 literal:wopkskpkskpkskpkskpkskpks
 literal:zgulmjhzdhjyzxylmjglmjrzd
@@ -516,7 +523,8 @@ literal:f2h4aru63wzfuruadgxj8ige9
 literal:7l35dxzxfsf6m32o/4dyg1ydz
 literal:pgh0bww+idwhls0gidxodg1sp
 literal:2gtcipomaac5krgibphtpwmdu
-literal:\x68\x74\164\160\163\x3a\
+# [HIGH-FP] decoded = "https:" (octal variant) — same as above, matches all HTTPS URLs
+# literal:\x68\x74\164\160\163\x3a\
 literal:\x63\150\155\157\144\137\
 literal:cm12bxn2d3nucnahcycdcmybg
 literal:yxbsyxgiehmheyeksplruiywh
@@ -530,7 +538,8 @@ literal:znvuy3rpb24gx3dgtzuojf9bn
 literal:ivborw0kggoaaaansuheugaaa
 literal:jp3zrvrae6uhnvsqdgkcjcvts
 literal:cghwdqovkg0kcq0kcqkjcqkji
-literal:\x3c\x21\104\x4f\x43\x54\
+# [HIGH-FP] decoded = "<!DOCT" — matches every HTML file with DOCTYPE declaration
+# literal:\x3c\x21\104\x4f\x43\x54\
 literal:41hfn0u7yr9dovfrcp0pyxurr
 literal:6576616p28677n756r636s6q7
 literal:90b9aa7e25f80cf4f64e990b7
@@ -552,17 +561,20 @@ literal:7zlrjppafizfwcz9h8mghcfns
 literal:6d6f76655f75706c6f6164656
 literal:h4siaaaaaaaaa0utkmjjt0kfa
 literal:68747470733a2f2f7261772e6
-literal:\x3c\163\143\x72\151\160\
+# [HIGH-FP] decoded = "<scrip" — matches every <script> tag in theme/plugin files
+# literal:\x3c\163\143\x72\151\160\
 literal:ya8fzzuufxlrqz0h5nauryhcq
 literal:cibnb3rvietzm255oybstwvrv
-literal:\x6c\x6f\x67\x67\x65\x64\
+# [HIGH-FP] decoded = "logged" — matches is_user_logged_in(), logged_in cookie, etc.
+# literal:\x6c\x6f\x67\x67\x65\x64\
 literal:qha5uaptmefcszc1wnqic9zta
 literal:anyxihb+rezh/szzuc/dyi7vt
 literal:pd9wahagjgvgufrmswzjvz0ny
 literal:66696c655f6765745f636f6e7
 literal:zx\132hbcu\x79ocu\x79\116
 literal:w9ktsxorjonbofwwunsxve3b4
-literal:\xa\x3c\x21\x64\157\x63\1
+# [HIGH-FP] decoded = "\n<!doc" — matches start of every HTML document (<!DOCTYPE html>)
+# literal:\xa\x3c\x21\x64\157\x63\1
 literal:3etrksi87rde3hd8s819poe0o
 literal:jbvnzvtqep53aaz8dhs7bikfj
 literal:657ada4416a8d7d7c5ae87dc6
@@ -624,7 +636,8 @@ literal:70687076657273696f6e
 literal:function perms($f) {
 literal:form.getvalue('cmd')
 literal:ui_bptm4efayo6lds5rc
-literal:\x6d\x6b\x64\151\x72
+# [HIGH-FP] decoded = "mkdir" — matches any file using mkdir(), wp_mkdir_p(), etc.
+# literal:\x6d\x6b\x64\151\x72
 literal:sfruuf9vu0vsx0fhru5u
 literal:<br>drive uploader";
 literal:wopkskpkskpkskpkskpk
@@ -667,7 +680,8 @@ literal:define('ں', '�');
 literal:wget -q -o - http
 literal:<?php @passthru(
 literal:@passthru($_get[
-literal:\x6d\141\x69\156
+# [HIGH-FP] decoded = "main" — matches "tagName":"main", <main>, remains, domain, textdomain, get_main_post, etc.
+# literal:\x6d\141\x69\156
 literal:ruby -rsocket -e
 literal:/var/spool/cron/
 literal:chitoge kirisaki
