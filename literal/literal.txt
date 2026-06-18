@@ -9,6 +9,7 @@ regex:eval\s*\(\s*(?:htmlspecialchars_decode|html_entity_decode|urldecode|rawurl
 regex:ini_set\s*\(\s*["'](?:disable_functions|open_basedir|safe_mode|allow_url_include|allow_url_fopen)["']\s*,\s*["'](?:"|''|0|false|off|null|none)["']
 regex:(?:usort|uasort|uksort|array_map|array_filter|array_walk)\s*\(\s*\$\w+\s*,\s*["'](?:system|exec|shell_exec|passthru|assert|eval|popen)["']
 regex:["']p["']\.["']r["']\.["']e["']\.["']g["']\.["']_["']\.["']r["']\.["']e["']\.["']p["']\.["']l["']\.["']a["']\.["']c["']\.["']e["']
+regex:(?:eval|assert|system|exec|shell_exec|passthru|include|require)(?:_once)?\s*\(\s*["'](?:\\x[0-9a-fA-F]{2}|\\[0-7]{2,3}){3,}["']
 regex:(?:error_reporting\s*\(\s*0|ini_set\s*\(\s*['"]display_errors['"]\s*,\s*0).*(?:set_time_limit|preg_replace.*\$_(?:POST|GET))
 regex:eval\s*\(\s*(?:base64_decode|gzinflate|gzuncompress|str_rot13|hex2bin|rawurldecode|urldecode|strrev|convert_uuencode)\s*\(
 regex:update_option\s*\(\s*["'](?:siteurl|home|template|stylesheet|active_plugins)["']\s*,\s*(?:base64_decode|gzinflate|\$_)
@@ -17,27 +18,28 @@ regex:(?:fsockopen|stream_socket_client|socket_connect)\s*\([^,)]+,\s*(?:4444|13
 regex:(?i)add_action\s*\(\s*['"](?:init|wp_head|wp_footer)['"]\s*,\s*['"](?:system|exec|passthru|eval|base64_decode)['"]
 regex:(?:include|require|file_get_contents|readfile|fopen|file)\s*\(\s*["']php://(?:input|filter|fd|memory|temp|stdin)
 regex:(?i)(base64_decode|gzinflate|gzuncompress|str_rot13|strrev)\s*\(\s*(?:base64_decode|gzinflate|str_rot13|\$_\w+)
-regex:eval\s*\(\s*htmlspecialchars_decode\s*\(\s*(?:gzinflate\s*\(\s*)?(?:urldecode\s*\(\s*)?base64_decode\s*\(
 regex:(?i)\$[a-zA-Z0-9_]+\s*=\s*['"]a['"]\.\s*['"]s['"]\.\s*['"]s['"]\.\s*['"]e['"]\.\s*['"]r['"]\.\s*['"]t['"]
+regex:eval\s*\(\s*htmlspecialchars_decode\s*\(\s*(?:gzinflate\s*\(\s*)?(?:urldecode\s*\(\s*)?base64_decode\s*\(
+regex:move_uploaded_file\s*\(\s*(?:\$_FILES\[["']\w+["']\]\[["']tmp_name["']\]|\$\w+)\s*,\s*[^,)]*\.php['")\s]
 regex:__(?:wakeup|destruct|toString|invoke|sleep)\s*\(\s*\)\s*\{[^}]*(?:eval|system|exec|shell_exec|passthru)
+regex:\$_(?:GET|POST|REQUEST|COOKIE|SERVER|FILES)\s*\[\s*["'](?:\\x[0-9a-fA-F]{2}|\\[0-7]{2,3}){2,}["']\s*\]
 regex:["']sys["']\s*\.\s*["']tem["']|["']ass["']\s*\.\s*["']ert["']|["']she["']\s*\.\s*["']ll_exec["']
 regex:(?:system|exec|shell_exec|passthru|popen|pcntl_exec)\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
 regex:a:\d+:\{s:\d+:["'](?:capabilities|wp_capabilities)["'];a:\d+:\{s:\d+:["']administrator["'];b:1
 regex:["']f["']\.["']u["']\.["']nctio["']\.["']n["']\.["']_["']\.["']e["']\.["']x["']\.["']ists["']
 regex:eval\s*\(\s*(?:base64_decode|gzinflate|gzuncompress|str_rot13)\s*\(\s*["'][A-Za-z0-9+/=]{60,}
+regex:type=["']file["'][^>]*name=["'](?:shell|cmd|upload|webshell|file_upload|payload|backdoor)["']
 regex:api\.telegram\.org/bot[A-Za-z0-9_]{10,}:[A-Za-z0-9_-]{30,}/send(?:Message|Document|Photo)
 regex:unserialize\s*\(\s*(?:base64_decode\s*\(|\$_(?:GET|POST|REQUEST|COOKIE|SESSION)\s*\[)
-# [HIGH-FP] 3+ short var assignments — matches config arrays, route definitions, form field maps
-# regex:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*(?:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*){2,}
 regex:<\?=\s*(?:base64_decode|gzinflate|gzuncompress|str_rot13|hex2bin|rawurldecode)\s*\(
 regex:eval\s*\(\s*\$\w+\s*\^\s*\$\w+\s*\)|(?:\$\w+\s*=\s*\$\w+\s*\^\s*\$\w+;\s*){2,}eval
+regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)\s*(?:&&|\?\?|and)\s*shell_exec\s*\(
 regex:(?:include|require|file_get_contents|fopen)\s*\([^)]*(?:\\x00|%00|\\0)[^)]*\.php
-regex:(?i)(?:Invoke-WebRequest|System\.Net\.WebClient|DownloadString|DownloadFile)
-# [HIGH-FP] FIXED: was matching any variable assignment — [-藩] range covers all ASCII; now narrowed to 1–3 char vars + single-letter value only
-regex:(?i)\$[a-zA-Z_]{1,3}\s*=\s*["']([easvltprcmnodxi])["']\s*;
+regex:(?i)\$[a-zA-Z_ -藩][a-zA-Z0-9_ -藩]*\s*=\s*(['"])(e|a|s|v|l|t|p|r|c|o|m|n|d|x|i)+ 
 regex:(?:hex2bin|bin2hex)\s*\(\s*(?:strrev|str_rot13|rawurldecode|base64_decode)\s*\(
 regex:(?:gzinflate|gzuncompress|strrev|str_rot13)\s*\(\s*(?:base64_decode|gzinflate)
 regex:ob_start\s*\(\s*["'](?:system|exec|shell_exec|passthru|assert|eval|popen)["']
+regex:(?i)(?:Invoke-WebRequest|System\.Net\.WebClient|DownloadString|DownloadFile)
 regex:eval\s*\(\s*str_rot13\s*\(\s*gzinflate\s*\(\s*str_rot13\s*\(\s*base64_decode
 regex:raw\.githubusercontent\.com/[^/\s]+/[^/\s]+/[^/\s]+/[^\s]+\.(?:php|sh|py|pl)
 regex:(?:nc|ncat|netcat|bash)\s+(?:-[a-zA-Z]*e\s+)?(?:/bin/bash|/bin/sh|cmd\.exe)
@@ -51,8 +53,8 @@ regex:\$_(?:GET|POST|REQUEST)\s*\[\s*(['"])(cmd|exec|shell|system|eval)\1\s*\]
 regex:(?:include|require)(?:_once)?\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
 regex:["']lang["']:\s*["']en["'],\s*["']error_reporting["']:\s*(?:true|false)
 regex:(?:system|exec|shell_exec|passthru)\s*\(\s*["']cmd(?:\.exe)?\s+/[cC]\s+
-regex:\$(?:smtp_pass|mail_pass|pass|password)\s*=\s*\$_(?:POST|GET|REQUEST)\[
 regex:str_rot13\s*\(\s*base64_decode\s*\(|base64_decode\s*\(\s*str_rot13\s*\(
+regex:\$(?:smtp_pass|mail_pass|pass|password)\s*=\s*\$_(?:POST|GET|REQUEST)\[
 regex:["']g["']\.["']z["']\.["']un["']\.["']compr["']\.["']e["']\.["']ss["']
 regex:<\?php\s+@copy\s*\(\s*\$_FILES\[["']?file["']?\]\[["']?tmp_name["']?\]
 regex:(?:AddType\s+application/x-httpd-(?:php|cgi)|php_value\s+\w+\s+\d{6,})
@@ -72,11 +74,14 @@ regex:mail\s*\(\s*stripslashes\s*\(\s*base64_decode\s*\(\s*\$\w+\[0\]
 regex:(?:file_get_contents|\$\w+)\s*\(\s*__FILE__\s*\)\s*,\s*-\d{4,}
 regex:stream_socket_client\s*\(\s*\(0x[0-9a-f]+(?:,\s*0x[0-9a-f]+)+
 regex:htmlspecialchars_decode\s*\(\s*urldecode\s*\(\s*base64_decode
-regex:preg_replace\s*\([^,]+/e['"][^,]*,\s*\$_(?:POST|GET|REQUEST)
 regex:discord(?:app)?\.com/api/webhooks/\d{17,}/[A-Za-z0-9_-]{60,}
 regex:ActiveXObject\s*\(\s*['"]WScript\.(?:Shell|Network)['"]\s*\)
+regex:preg_replace\s*\([^,]+/e['"][^,]*,\s*\$_(?:POST|GET|REQUEST)
 regex:pack\s*\(\s*["']H\*["']\s*,\s*["'][0-9a-fA-F]{20,}["']\s*\)
 regex:preg_replace\s*\(\s*["'][^"']*\/[a-zA-Z]*e[a-zA-Z]*["']\s*,
+regex:(?i)\$[a-zA-Z_]{1,3}\s*=\s*["']([easvltprcmnodxi])["']\s*;
+regex:\$\w+\s*=\s*["'](?:\\x[0-9a-fA-F]{2}|\\[0-7]{2,3}){4,}["']
+regex:\$\{\s*["'](?:\\x[0-9a-fA-F]{2}|\\[0-7]{2,3}){3,}["']\s*\}
 regex:define\s*\(\s*["']DB_USER["']\s*,\s*["']username_here["']
 regex:base64_decode\s*\(\s*['"]([a-zA-Z0-9+\/=]{300,})['"]\s*\)
 regex:pcntl_exec\s*\(\s*["'](?:/bin/|/usr/bin/|/usr/local/bin/)
@@ -85,61 +90,63 @@ regex:@?eval\s*\(\s*(?:\$\w+\s*\(|\$_(?:POST|GET|REQUEST)\s*\[)
 regex:\$\w+\s*=\s*["']base["'];\s*\$\w+\s*=\s*["']64_decode["']
 regex:include\s+["'](?:\\[0-9a-fx]+)+["']\.basename\(__FILE__\)
 regex:gzinflate\s*\(\s*substr\s*\(\s*base64_decode\s*\(\s*["']
-regex:eval\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\(\s*\$\w+
 regex:(?:INTO\s+OUTFILE|INTO\s+DUMPFILE)\s+["'][^"']*\.php["']
-regex:chr\(\d+(?:[+\-*]\d+)*\)(?:\.chr\(\d+(?:[+\-*]\d+)*\))+
-regex:ini_set\s*\(\s*["']disable_functions["']\s*,\s*["']['"]
-regex:(?i)__import__\s*\(\s*['"]os['"]\s*\)\.(?:system|popen)
-regex:["']f["']\.["']ile_get["']\.["']_conte["']\.["']nts["']
+regex:eval\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\(\s*\$\w+
 regex:(?i)eval\s*\(\s*(?:req|request)\.(?:body|query|headers)
-regex:str_rot13\s*\(\s*['"]([a-zA-Z0-9+\/=]{300,})['"]\s*\)
+regex:(?i)__import__\s*\(\s*['"]os['"]\s*\)\.(?:system|popen)
+regex:ini_set\s*\(\s*["']disable_functions["']\s*,\s*["']['"]
+regex:chr\(\d+(?:[+\-*]\d+)*\)(?:\.chr\(\d+(?:[+\-*]\d+)*\))+
+regex:["']f["']\.["']ile_get["']\.["']_conte["']\.["']nts["']
 regex:\$2[abxy]\$(?:0[4-9]|[12]\d|3[01])\$[A-Za-z0-9./]{53}
 regex:gzinflate\s*\(\s*['"]([a-zA-Z0-9+\/=]{300,})['"]\s*\)
 regex:\$\{\$\{["'](?:\\x[0-9a-fA-F]{2}|\\[0-9]{1,3})+["']\}
 regex:(?i)curl\s+(?:-s\s+|-O\s+)?https?://.*\|.*(?:bash|sh)
 regex:(?i)wget\s+(?:-q\s+|-O\s+)?https?://.*\|.*(?:bash|sh)
-regex:(?i)wp_remote_get\s*\(\s*['"]https?://[^'"]+\.txt['"]
 regex:(?i)file_get_contents\s*\(\s*['"]php://input['"]\s*\)
+regex:(?i)wp_remote_get\s*\(\s*['"]https?://[^'"]+\.txt['"]
+regex:str_rot13\s*\(\s*['"]([a-zA-Z0-9+\/=]{300,})['"]\s*\)
+regex:<\?php\s+\$\{["'](?:\\x[0-9a-fA-F]{2}|[A-Z0-9])+["']
 regex:["']base6["']\.["']4["']\.["']_deco["']\.["']de["']?
 regex:base64_encode\s*\(\s*hex2bin\s*\(\s*\$_REQUEST\[["']
-regex:<\?php\s+\$\{["'](?:\\x[0-9a-fA-F]{2}|[A-Z0-9])+["']
 regex:\$_FILES\[["']file_upload["']\]\[["']tmp_name["']\]
 regex:["']base64["']\.["']_["']\.["']enc["']\.["']ode["']
 regex:["']bas["']\.["']e64["']\.["']_deco["']\.["']de["']
 regex:\$wpdb\s*->\s*insert\s*\(\s*\$wpdb\s*->\s*users\s*,
 regex:\$\$\w+\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
+regex:\$\{\s*\$_(?:GET|POST|REQUEST|COOKIE)\[.*?\]\s*\}
 regex:isset\(\$_POST\[["']c["']\]\).*@file_get_contents
 regex:file_put_contents\s*\(\s*[^,]+,\s*\$_(?:POST|GET)
 regex:["']st["']\.["']r["']\.["']_replac["']\.["']e["']
-regex:\$\{\s*\$_(?:GET|POST|REQUEST|COOKIE)\[.*?\]\s*\}
 regex:(?i)python\s+-c\s+['"]import\s+(?:socket|pty|os)
 regex:strval\s*\(\s*basename\s*\(\s*["']/var/www/html/
-regex:substr\s*\(\s*str_shuffle\s*\(\s*str_repeat\s*\(
 regex:eval\s*\(\s*["'](?:\\[0-9]{2,3}|\\x[0-9a-f]{2})+
-regex:["']st["']\.["']r["']\.["']_rot["']\.["']13["']
+regex:eval\(base64_decode\(\$_POST\[['"]cmd['"]\]\)\);
+regex:substr\s*\(\s*str_shuffle\s*\(\s*str_repeat\s*\(
 regex:["']gzin["']\.["']f["']\.["']la["']\.["']te["']
 regex:eval\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
 regex:["']s["']\.["']tr["']\.["']_ro["']\.["']t13["']
 regex:hex2bin\s*\(\s*['"]([0-9a-fA-F]{300,})['"]\s*\)
 regex:(?i)subprocess\.(?:Popen|call|check_output|run)
+regex:["']st["']\.["']r["']\.["']_rot["']\.["']13["']
+regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)
+regex:pack\s*\(\s*["']H\*["'],\s*str_rot13\s*\(\s*\$
 regex:shell_exec\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
 regex:(?i)pty\.spawn\s*\(\s*['"]/bin/(?:bash|sh)['"]
-regex:pack\s*\(\s*["']H\*["'],\s*str_rot13\s*\(\s*\$
-# [HIGH-FP] function_exists('shell_exec') — server-capability checks in legitimate plugins/dashboards
-# regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)
-regex:eval\s*\(\s*\w+\s*\(\s*["'][A-Za-z0-9+/=]{6,}
-regex:gz(?:inflate|uncompress)\s*\(\s*base64_decode
 regex:dl\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
+regex:gz(?:inflate|uncompress)\s*\(\s*base64_decode
+regex:eval\s*\(\s*\w+\s*\(\s*["'][A-Za-z0-9+/=]{6,}
+regex:["'][a-z]{1,5}\\x[0-9a-fA-F]{2}[a-z]{0,8}["']
 regex:if\s*\(\s*\$_POST\[["']_upl["']\]\s*==\s*["']
-regex:eval\s*\(\s*(?:base64_decode|gzinflate)\s*\(
-regex:create_function\s*\(\s*["'][^"']*["']\s*,\s*
-# [HIGH-FP] move_uploaded_file alone — hits every file upload form handler; narrowed version in HIGH-FP section below
-# regex:move_uploaded_file\s*\(\s*(?:\$_FILES|\$\w+)
-regex:(?:\$_[a-z]=['"][a-z0-9_]+['"]\s*;?\s*){10,}
-regex:hex2bin\s*\(\s*["'][0-9a-fA-F]{40,}["']\s*\)
-regex:new\s+COM\s*\(\s*['"]WScript\.Shell['"]\s*\)
-regex:passthru\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
+regex:\$\w+\s*=\s*["'](?:\\x[0-9a-fA-F]{2}){6,}["']
 regex:\$\w+=\s*['"]0x[0-9a-f]+(?:\.0x[0-9a-f]+){3}
+regex:passthru\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
+regex:new\s+COM\s*\(\s*['"]WScript\.Shell['"]\s*\)
+regex:hex2bin\s*\(\s*["'][0-9a-fA-F]{40,}["']\s*\)
+regex:(?:\$_[a-z]=['"][a-z0-9_]+['"]\s*;?\s*){10,}
+regex:create_function\s*\(\s*["'][^"']*["']\s*,\s*
+regex:eval\s*\(\s*(?:base64_decode|gzinflate)\s*\(
+regex:chr\(\d{2,3}\)(?:\s*\.\s*chr\(\d{2,3}\)){3,}
+regex:move_uploaded_file\s*\(\s*(?:\$_FILES|\$\w+)
 regex:file_put_contents\s*\(\s*[^,]+\.php['"]\s*,
 regex:chr\(\d+\)(?:\.chr\(\d+\)){3,}(?:\(|;|\s*=)
 regex:if\s*\(\$\w+==["']d["']\s+or\s+\$\w+==["']m
@@ -148,35 +155,30 @@ regex:(?i)certutil\.exe\s+(?:-urlcache|-f|-split)
 regex:password\s*=\s*["']\w+["'];\s*//\s*password
 regex:document\.write\s*\(\s*unescape\s*\(\s*["']
 regex:add_action\(["']init["'],\s*create_function
+regex:\$\w+\s*\.=\s*["'][A-Za-z0-9+/=]{50,}["'];?
 regex:(?:GIF89a?|PNG|JFIF|EXIF|BM)\S{0,20}<\?php
 regex:a:\d+:\{s:\d+:["']administrator["'];b:1;\}
 regex:file_put_contents\s*\(\s*\$\w+,\s*\$\w+\);
 regex:base64_decode\s*\(\s*\$_POST\[["']z0["']\]
-regex:system\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
 regex:base_convert\s*\(\s*(?:bin2hex|@fileperms)
 regex:\$\{\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
 regex:["']e["']\.["']v["']\.["']a["']\.["']l["']
 regex:assert\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
+regex:\\x[0-9a-fA-F]{2}(?:\\x[0-9a-fA-F]{2}){5,}
+regex:system\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
 regex:readfile\s*\(\s*base64_decode\s*\(\s*["']
 regex:(?i)new\s+Function\s*\(\s*(?:req|request)
 regex:eval\s+\(\s*['"]?>\s*['"]?\.\s*\$\w+\s*\)
-# [HIGH-FP] eval($func($var)) — matches template engine patterns like eval($twig->render($x))
-# regex:eval\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\)\s*\)
+regex:mail\s*\(\s*\$_(?:POST|GET|REQUEST)\s*\[
+regex:eval\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\)\s*\)
 regex:_COOKIE\[["']user_id["']\]\s*===\s*["']
 regex:CONCAT\(0x[0-9a-f]+(?:,\s*0x[0-9a-f]+)+
-# [HIGH-FP] string concat — any-length base64-like chars; narrowed to 50+ chars in HIGH-FP section
-# regex:\$\w+\s*\.=\s*["'][A-Za-z0-9+/=]+["'];?
 regex:(?i)fsockopen\s*\(\s*(['"])(tcp|udp)://
-# [HIGH-FP] hash('sha1'|'md5'|'crc32') — extremely common in legitimate WP code (password_hash alternatives, checksums)
-# regex:hash\s*\(\s*["'](?:crc32|sha1|md5)["']
-# [HIGH-FP] 'value'==$_GET['key'] comparison — common router/action dispatch pattern in plugins
-# regex:["']\w+["']==\s*\$_GET\[["']\w+["']\]
+regex:hash\s*\(\s*["'](?:crc32|sha1|md5)["']
 regex:set_role\s*\(\s*["']administrator["']
 regex:eval\s*\(\s*base64_decode\s*\(\s*["']
-# [HIGH-FP] githubusercontent.com URL — duplicate of stricter line-40 pattern (which requires .php/.sh path); update checkers use raw GH
-# regex:(?:raw\.)?githubusercontent\.com/\w+
-# [HIGH-FP] only 2 chr() calls — too low threshold; use 4+ requirement in HIGH-FP section
-# regex:chr\(\d{2,3}\)\s*\.\s*chr\(\d{2,3}\)
+regex:(?:raw\.)?githubusercontent\.com/\w+
+regex:chr\(\d{2,3}\)\s*\.\s*chr\(\d{2,3}\)
 regex:eval\s*\(\s*\$_SERVER\s*\[["']HTTP_
 regex:<h3>Current Directory:\s*\$\w+</h3>
 regex:eval\s*\(\s*['"]?>['"]\s*\.\s*\$\w+
@@ -184,111 +186,65 @@ regex:isset\s*\(\s*\$_POST\[["']unlock_pw
 regex:decode_base64\s*\(\s*\$\w+\{["']cmd
 regex:eval\s*\(\s*["']\\\$\w+\s*=\s*\$\w+
 regex:(?i)disable_functions\s*=\s*(none)
-# [HIGH-FP] require_once("string") — matches virtually every WordPress plugin/theme entry file
-# regex:<\?php\s+require_once\s*\(\s*["']
-regex:isset\s*\(\s*\$_POST\[["']dounzip
 regex:_GET\[["']Ghost["']\]\s*==\s*["']
+regex:isset\s*\(\s*\$_POST\[["']dounzip
+regex:system\(\$_POST\[['"]cmd['"]\]\);
+regex:<\?php\s+require_once\s*\(\s*["']
+regex:\\[0-7]{2,3}(?:\\[0-7]{2,3}){4,}
+regex:system\(\$_GET\[['"]cmd['"]\]\);
 regex:eXtRaCt\s*\(\s*_{4}\s*\(\s*\$\w+
-regex:@copy\s*\(\s*\$_FILES\[["']file
-# [HIGH-FP] 1–3 char function names — very common in utility code, WP shorthand helpers, Joomla, etc.
-# regex:function\s+\w{1,3}\s*\(\s*\$\w+
 regex:(?:pack\s*\(['"][Vv]['"].*){3,}
+regex:@copy\s*\(\s*\$_FILES\[["']file
 regex:copy\s*\(\s*\$_FILES\[["']file
 regex:["']gzu["']\.["']ncompress["']
 regex:["']gzuncompres["']\.["']s["']
 regex:base64_decode\s*\(\s*["']MDA=
 regex:isset\s*\(\s*\$_POST\[["']act
-regex:include\s*\(\s*base64_decode
-regex:zip->setPassword\s*\(\s*["']
-regex:\$GLOBALS\[[^\x00-\x7F\]]+\]
-# [HIGH-FP] CamelCase functions 9+ chars — common in OOP/WooCommerce/Elementor/Jetpack
-# regex:function\s+[A-Z][a-zA-Z]{8,}
 regex:isset\s*\(\s*\$_GET\[["']cmd
-regex:\d{8,10}:AA[A-Za-z0-9_-]{33}
-regex:\$\w+\s*=\s*'gzuncompres[s']
-regex:Array\s*\(\s*'co'\.'py'\s*\)
+regex:\$GLOBALS\[[^\x00-\x7F\]]+\]
+regex:zip->setPassword\s*\(\s*["']
+regex:include\s*\(\s*base64_decode
 regex:base64\.b64decode\s*\(\s*\w+
-regex:file\s*=\s*["']worksec\.php
+regex:Array\s*\(\s*'co'\.'py'\s*\)
+regex:\$\w+\s*=\s*'gzuncompres[s']
+regex:\d{8,10}:AA[A-Za-z0-9_-]{33}
 regex:eval\s*\(\s*<<<[A-Z_]{2,}\b
-# [HIGH-FP] _-prefixed functions — WordPress core uses hundreds (_doing_it_wrong, _get_list_table, etc.)
-# regex:function\s+_[A-Za-z0-9]{4,}
-regex:@include\s*\(\s*["']\\057
-regex:sha1\s*\(\s*md5\s*\(\s*\$
+regex:file\s*=\s*["']worksec\.php
 regex:include\s*\(\s*['"]zip://
-regex:<\?php\s+eval/\*[^*]*\*/
+regex:sha1\s*\(\s*md5\s*\(\s*\$
+regex:@include\s*\(\s*["']\\057
 regex:\$\w+\s*=\s*["']xxx["'];
 regex:goto\s+[A-Za-z0-9]{10,};
+regex:<\?php\s+include(_once)?
+regex:<\?php\s+eval/\*[^*]*\*/
 regex:strrev\s*\(\s*gzinflate
 regex:nohup\s+\$\(nohup\s+php
-regex:(?i)pickle\.loads\s*\(
-# regex:GLOBALS["']\}\[["']\w+
+regex:\s+password\s*=\s*["']
+regex:GLOBALS["']\}\[["']\w+
 regex:<\?\s+\$GLOBALS\[["']_
-regex:zip->open\s*\(\s*["']
-# [HIGH-FP] <?php include_once — matches first-line of nearly every WordPress theme/plugin file
-# regex:<\?php\s+include_once
+regex:(?i)pickle\.loads\s*\(
 regex:login_pass\s*=\s*["']
-regex:\$_REQUEST\[["']exec
+regex:zip->open\s*\(\s*["']
 regex:(?i)perl\s+-MIO\s+-e
-# [HIGH-FP] func(__FILE__) — matches plugin_dir_path(__FILE__), dirname(__FILE__) — ubiquitous in WP
-# regex:\w+\s*\(\s*__FILE__
-# [HIGH-FP] include('string') — matches every static include path; line-49 already covers the dangerous include($GET) case
-# regex:include\s*\(\s*["']
+regex:\$_REQUEST\[["']exec
 regex:\$_REQUEST\[["']cmd
-regex:goto\s+\w+;\s*\w+:
-regex:eval\s*\(\s*['"]?>
-regex:%PDF-\d+-\d+<\?php
+regex:include\s*\(\s*["']
 regex:eval\s*/\*[^*]*\*/
 regex:\$\w*hexurl\w*\s*=
+regex:%PDF-\d+-\d+<\?php
+regex:eval\s*\(\s*['"]?>
+regex:goto\s+\w+;\s*\w+:
 regex:<\?php\s+@require
 regex:eval\s*\(\s*\$\w+
-# [HIGH-FP] mail($var) — matches every contact form and notification plugin; line-69 already covers mail(stripslashes(base64_decode(...
-# regex:mail\s*\(\s*\$\w+
-# [HIGH-FP] type="file" — matches every HTML file-upload input in WooCommerce, forms, media plugins
-# regex:type=["']file["']
+regex:type=["']file["']
 regex:\$z\s*\.=\s*["']
 regex:atob\s*\(\s*["']
-# [HIGH-FP] password = "..." — matches password form fields, config defaults, i18n string keys
-# regex:password = ["']
 regex:eval\(['"]\?>
-# [HIGH-FP] <?php /* — matches every well-commented PHP file (plugin headers, license blocks, etc.)
-# regex:<\?php\s+/\*
+regex:<\?php\s+/\*
 regex:["']v3x3["']
 regex:<\?=\s*/\*+/
-regex:system\(\$_GET\[['"]cmd['"]\]\);
-regex:eval\(base64_decode\(\$_POST\[['"]cmd['"]\]\)\);
-regex:system\(\$_POST\[['"]cmd['"]\]\);
-regex:(?:function cgi_get_post_vars|webshell command executor|short-link-th\.pages\.dev|betem\.reversespell\.icu|file zip tidak ditemukan|simple php file manager|btuan04\.ytproduct\.top|fabricio seger kolling|githubusercontent\.com|simpleeeverything\.com|teamnoreal\.pages\.dev|gantidenganpasswordlu|backconnect bash-like|sniper404ghostxploit|obfuscation provided|file management tool|slaosai\.github\.io|paste\.myconan\.net|simple file manager|revision vinooo_sys|fm_upload_extension|haxor-research\.com|kelelawarcyberteam|berhasil terupload|berhasil diekstrak|enphp\.djunny\.com|xman php ver 1\.4|wp health monitor|7p3bcinlsickvdc22|tiny file manager|cannot create zip|godzilla webshell|downloadwithfopen|redirectseo\.icu|zerotwostrg\.xyz|marslogs\.co\.id|mailer by x-nero|7x1re9rgevdnnoc5|php file manager|foxcybersecurity|skk-shell-hunter|gel4y mini shell|ee434023cf89d7df|x-xss-protection|nanshan\.eu\.org|oslkhpzmgvzohyst|unknowndevice64|classiccartrust|tinyfilemanager|ahr0chm6ly9yyxc|leaf php mailer|r00t-shell\.com|alfa team shell|Alfa-Team|upload\.c99\.nl|function madrid|simple webshell|xploitid zatura|imeco-uae\.com|sorry,no files|php obfuscator|donat was here|757365725f6964|new ziparchive|trustsec0x0777|script kiddies|leafmailer\.pw|simpancom\.top|aslimenyalavip|0x00001bb;goto|antsword shell|tennc webshell|safe0ver shell|laudanum shell|behinder shell|add admin user|kingdefserver|obfuscated by|china chopper|by zeura\.com|zxzhbcuyocuyn|f-automatical|php encode by|wso_setcookie|gagal membuat|phpjiami\.com|r57shell\.net|c99shell\.com|shellc0de\.ru|weevely agent|login sukses|negat1ve1337|deckphp beta|adminer\.org|ghazascanner|fungsi untuk|jackal shell|ufa99ac\.com|ghostbin\.co|qqifquaqdzvp|worksec\.php|fathurfreakz|phpspy shell|7x1te9s2suh3|obfuscate by|hibikapalapi|ochoa shell|timtam\.rpl|egre55\.com|prinsh\.com|getbacklink|<\?php goto|webshellorb|tempuserpat|haxornoname|yrg0suiuhis|new wp_user|p0wny shell|sukajanda01|anonsecteam|filemanager|wso_version|d157ruck70r|sztdcduq53f|ahr0chm6ly9|uploader by|indoxploit|alfa shell|phpjm\.net|rentry\.co|drunkshell|o000oo0o00|memek_cyna|seoteamddd|beritabaru|haxorshell|b374k\.net|ikanmujaer|vinooo_sys|uutool\.cn|hackersec|alfashell|shelby404|tenyom189|jagoan sl|spongebob|strezzboy|ichigo778|anon\.txt|bkv8\.txt|fx29shell|hacked by|bwphp\.cn|paste\.ee|lpsh\.net|marijuana|r57shell|c99shell|pwned by|phpjiami|unamexid|nyanpasu|wso_salt|m4ndzsec|nilam189|tds\.php|filesman|pastebin|con7ext|den1xxx|yak pro|by fopo|gai-seo|obz\.bz|dosasec|wso 2\.|ngentod|aptisme|xlist99|jembut|kuntul|zehir4|kontol|jancox|lonte|b374k|memek|avril|b1749)
-# [HIGH-FP] copy|file_get_contents|file_put_contents|scandir|serialize|str_repeat|strlen|touch|base64_decode|gzinflate|gzuncompress|str_rot13|strrev removed — too common in legitimate code
-# Use the narrowed version below that only matches dangerous execution sinks alone:
-regex:(?:eval|assert|system|exec|shell_exec|passthru|popen|proc_open|pcntl_exec)\s*\(
-
-# === REGEX — HIGH FALSE POSITIVE RISK (score-reduce only; do NOT hard-block) ===
-# These patterns match both legitimate and malicious code.
-# Recommended: use as score-reducers or require corroboration from another pattern.
-
-# move_uploaded_file writing to .php extension — legitimate uploads go to upload dirs, not .php files
-regex:move_uploaded_file\s*\(\s*(?:\$_FILES\[["']\w+["']\]\[["']tmp_name["']\]|\$\w+)\s*,\s*[^,)]*\.php['")\s]
-
-# 5+ single/two-char variable assignments in sequence — classic obfuscation variable setup
-regex:\$\w+\s*=\s*["'][a-z0-9_]{1,2}["'];\s*(?:\$\w+\s*=\s*["'][a-z0-9_]{1,2}["'];\s*){4,}
-
-# Base64-like string chunk concatenation (50+ chars) — common in chunked payload assembly
-regex:\$\w+\s*\.=\s*["'][A-Za-z0-9+/=]{50,}["'];?
-
-# chr() concatenation chain 4+ calls — obfuscated string construction
-regex:chr\(\d{2,3}\)(?:\s*\.\s*chr\(\d{2,3}\)){3,}
-
-# function_exists('shell_exec') followed immediately by execution on same line
-regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)\s*(?:&&|\?\?|and)\s*shell_exec\s*\(
-
-# mail() called with direct user input (no sanitization wrapper)
-regex:mail\s*\(\s*\$_(?:POST|GET|REQUEST)\s*\[
-
-# <input type="file"> with a suspicious name attribute (shell/upload/file_upload)
-regex:type=["']file["'][^>]*name=["'](?:shell|cmd|upload|webshell|file_upload|payload|backdoor)["']
-
-# 3+ short var assignments (1–4 chars) — borderline; flag only if combined with other indicators
-# regex:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*(?:\$\w+\s*=\s*["'][a-z0-9_]{1,4}["'];\s*){2,}
+regex:(?:function cgi_get_post_vars|webshell command executor|short-link-th\.pages\.dev|betem\.reversespell\.icu|file zip tidak ditemukan|simple php file manager|btuan04\.ytproduct\.top|fabricio seger kolling|githubusercontent\.com|simpleeeverything\.com|teamnoreal\.pages\.dev|gantidenganpasswordlu|backconnect bash-like|sniper404ghostxploit|obfuscation provided|file management tool|slaosai\.github\.io|paste\.myconan\.net|simple file manager|revision vinooo_sys|fm_upload_extension|haxor-research\.com|kelelawarcyberteam|berhasil terupload|berhasil diekstrak|enphp\.djunny\.com|xman php ver 1\.4|wp health monitor|7p3bcinlsickvdc22|tiny file manager|cannot create zip|godzilla webshell|downloadwithfopen|redirectseo\.icu|zerotwostrg\.xyz|marslogs\.co\.id|mailer by x-nero|7x1re9rgevdnnoc5|php file manager|foxcybersecurity|skk-shell-hunter|gel4y mini shell|ee434023cf89d7df|x-xss-protection|nanshan\.eu\.org|oslkhpzmgvzohyst|unknowndevice64|classiccartrust|tinyfilemanager|ahr0chm6ly9yyxc|leaf php mailer|r00t-shell\.com|alfa team shell|Alfa-Team|upload\.c99\.nl|function madrid|simple webshell|xploitid zatura|imeco-uae\.com|sorry,no files|php obfuscator|donat was here|757365725f6964|new ziparchive|trustsec0x0777|script kiddies|leafmailer\.pw|simpancom\.top|aslimenyalavip|0x00001bb;goto|antsword shell|tennc webshell|safe0ver shell|laudanum shell|behinder shell|add admin user|kingdefserver|obfuscated by|china chopper|by zeura\.com|zxzhbcuyocuyn|f-automatical|php encode by|wso_setcookie|gagal membuat|phpjiami\.com|r57shell\.net|c99shell\.com|shellc0de\.ru|weevely agent|login sukses|negat1ve1337|deckphp beta|adminer\.org|ghazascanner|fungsi untuk|jackal shell|ufa99ac\.com|ghostbin\.co|qqifquaqdzvp|worksec\.php|fathurfreakz|phpspy shell|7x1te9s2suh3|obfuscate by|hibikapalapi|ochoa shell|timtam\.rpl|egre55\.com|prinsh\.com|getbacklink|<\?php goto|webshellorb|tempuserpat|haxornoname|yrg0suiuhis|new wp_user|p0wny shell|sukajanda01|anonsecteam|filemanager|wso_version|d157ruck70r|sztdcduq53f|ahr0chm6ly9|uploader by|indoxploit|alfa shell|phpjm\.net|\.htaccess|rentry\.co|drunkshell|o000oo0o00|memek_cyna|seoteamddd|beritabaru|haxorshell|b374k\.net|ikanmujaer|vinooo_sys|uutool\.cn|hackersec|alfashell|shelby404|tenyom189|jagoan sl|spongebob|strezzboy|ichigo778|anon\.txt|bkv8\.txt|user\.ini|fx29shell|hacked by|bwphp\.cn|paste\.ee|lpsh\.net|marijuana|r57shell|c99shell|pwned by|phpjiami|php\.ini|unamexid|nyanpasu|wso_salt|m4ndzsec|nilam189|tds\.php|filesman|pastebin|con7ext|den1xxx|yak pro|by fopo|gai-seo|obz\.bz|dosasec|wso 2\.|ngentod|aptisme|xlist99|jembut|kuntul|zehir4|kontol|jancox|lonte|b374k|memek|avril|b1749)
+regex:(?:eval|assert|system|exec|shell_exec|passthru|popen|proc_open|pcntl_exec|copy|file_get_contents|file_put_contents|scandir|serialize|str_repeat|strlen|touch|base64_decode|gzinflate|gzuncompress|str_rot13|strrev)\s*\(
 
 # === BACKDOOR LITERAL PATTERNS ===
 literal:$in{$key} .= $val;}if($in{"cmd"}){print decode_base64($in{"check"})."<pre>";system(decode_base64($in{"cmd"}));
@@ -354,8 +310,6 @@ literal:7zlrjppafizfwcz9h8mghcfnseq23spa
 literal:ueq5d2fiqwdawep5yjnkzmntvndim0ow
 literal:sy1lznfqt1dll7fw10uvks1lzs8tkeot
 literal:sy1lznfqt7dt10uvks1lzs8tkeotltzi
-# [HIGH-FP] decoded = "DOCUMENT" — matches DOMDocument, $document, documents in Elementor/WP Importer
-# literal:\x44\x4f\x43\x55\x4d\x45\x4e\x54
 literal:2gtcipomaac5krgibphtpwmduplkibos
 literal:wlhaagjdz25qejrutg1knmrxnwpimjf3
 literal:!isset($_post["\156\x67\141\x72\
@@ -402,15 +356,11 @@ literal:https://bypass.pw/raw/u5xpz0e
 literal:83a6ee9b34553e9cf5ef0c507270d
 literal:powershell -nop -exec bypass
 literal:<%=request.servervariables("
-# [HIGH-FP] decoded = "_COOKIE" — matches any PHP file using $_COOKIE superglobal
-# literal:\x5f\x43\x4f\x4f\x4b\x49\x45
 literal:position:absolute;left:-9999
 literal:ini_set('error_log', null);
 literal:4dyg1ydzgoofseewrws4akqaeik
 literal:wjjwmfftrnphv056u1c1bwj3pt0
 literal:uname -a; w; id; /bin/sh -i
-# [HIGH-FP] decoded = "<div id" — matches every <div id="..."> in any HTML/PHP template
-# literal:\x3c\144\151\166\40\151\x64
 literal:define('rnavkdih',__file__)
 literal:$dir=$_request["uploaddir"]
 literal:echo $cmd | base64 --decode
@@ -454,8 +404,6 @@ literal:pbfqhfcmdseuttguppndhsxmm
 literal:68747470733a2f2f616c66612
 literal:pd9wahancmhlywrlcignq29ud
 literal:fahlkpgghpidhkihiqhl0adn5
-# [HIGH-FP] decoded = "dirname" — matches every dirname(__FILE__), dirname(__DIR__) call
-# literal:\x64\151\x72\156\141\x6d\
 literal:3225416e6139337a364232256
 literal:%3c%73%63%72%69%70%74%20%
 literal:downloadwithfilegetconten
@@ -478,8 +426,6 @@ literal:7x3bcum4suc7vwkt9jtlozytw
 literal:awyoiwz1bmn0aw9ux2v4axn0c
 literal:zxzhbcuyocuynnf1b3qlm0ilm
 literal:atmkbcatmczkdbqjcgqsmuxsk
-# [HIGH-FP] decoded = "https:" — matches every HTTPS URL in every plugin/theme
-# literal:\x68\x74\x74\x70\x73\x3a\
 literal:uwx9wglltpjuwurckmdmz2tmc
 literal:1756730583473454b4352506b
 literal:47364e4159463225414232257
@@ -498,8 +444,6 @@ literal:ueq5d2fiqwdawep5yjnkzmntv
 literal:pd9wahagjg9qndiyoca9icjwo
 literal:sy1lznfqt1dll7fw10uvks1lz
 literal:wdlyrqs3e1m3dydfrx7khux6p
-# [HIGH-FP] decoded = "SCRIPT" — matches every file with JavaScript or wp_enqueue_script()
-# literal:\x53\x43\x52\x49\x50\x54\
 literal:cnnlc3npb25fc3rhcnqoktskz
 literal:sy1lznfqt7dt10uvks1lzs8tk
 literal:vic2l0zsddpsjszwfmbwfpbgv
@@ -509,8 +453,6 @@ literal:\x77\157\x6e\x67\55\x74\x
 literal:x69\154\x65\144\40\x74\x6
 literal:qy+q2639fshx8d2y0k59rjiwo
 literal:icagicagicagicagicagicagi
-# [HIGH-FP] decoded = "_get_c" — matches WP functions like _get_cron_lock(), _get_dropins(), etc.
-# literal:\x5f\x67\x65\x74\x5f\x63\
 literal:aynpzphzlhsrgd6k0tor4arg7
 literal:wopkskpkskpkskpkskpkskpks
 literal:zgulmjhzdhjyzxylmjglmjrzd
@@ -523,8 +465,6 @@ literal:f2h4aru63wzfuruadgxj8ige9
 literal:7l35dxzxfsf6m32o/4dyg1ydz
 literal:pgh0bww+idwhls0gidxodg1sp
 literal:2gtcipomaac5krgibphtpwmdu
-# [HIGH-FP] decoded = "https:" (octal variant) — same as above, matches all HTTPS URLs
-# literal:\x68\x74\164\160\163\x3a\
 literal:\x63\150\155\157\144\137\
 literal:cm12bxn2d3nucnahcycdcmybg
 literal:yxbsyxgiehmheyeksplruiywh
@@ -538,8 +478,6 @@ literal:znvuy3rpb24gx3dgtzuojf9bn
 literal:ivborw0kggoaaaansuheugaaa
 literal:jp3zrvrae6uhnvsqdgkcjcvts
 literal:cghwdqovkg0kcq0kcqkjcqkji
-# [HIGH-FP] decoded = "<!DOCT" — matches every HTML file with DOCTYPE declaration
-# literal:\x3c\x21\104\x4f\x43\x54\
 literal:41hfn0u7yr9dovfrcp0pyxurr
 literal:6576616p28677n756r636s6q7
 literal:90b9aa7e25f80cf4f64e990b7
@@ -561,20 +499,14 @@ literal:7zlrjppafizfwcz9h8mghcfns
 literal:6d6f76655f75706c6f6164656
 literal:h4siaaaaaaaaa0utkmjjt0kfa
 literal:68747470733a2f2f7261772e6
-# [HIGH-FP] decoded = "<scrip" — matches every <script> tag in theme/plugin files
-# literal:\x3c\163\143\x72\151\160\
 literal:ya8fzzuufxlrqz0h5nauryhcq
 literal:cibnb3rvietzm255oybstwvrv
-# [HIGH-FP] decoded = "logged" — matches is_user_logged_in(), logged_in cookie, etc.
-# literal:\x6c\x6f\x67\x67\x65\x64\
 literal:qha5uaptmefcszc1wnqic9zta
 literal:anyxihb+rezh/szzuc/dyi7vt
 literal:pd9wahagjgvgufrmswzjvz0ny
 literal:66696c655f6765745f636f6e7
 literal:zx\132hbcu\x79ocu\x79\116
 literal:w9ktsxorjonbofwwunsxve3b4
-# [HIGH-FP] decoded = "\n<!doc" — matches start of every HTML document (<!DOCTYPE html>)
-# literal:\xa\x3c\x21\x64\157\x63\1
 literal:3etrksi87rde3hd8s819poe0o
 literal:jbvnzvtqep53aaz8dhs7bikfj
 literal:657ada4416a8d7d7c5ae87dc6
@@ -636,8 +568,6 @@ literal:70687076657273696f6e
 literal:function perms($f) {
 literal:form.getvalue('cmd')
 literal:ui_bptm4efayo6lds5rc
-# [HIGH-FP] decoded = "mkdir" — matches any file using mkdir(), wp_mkdir_p(), etc.
-# literal:\x6d\x6b\x64\151\x72
 literal:sfruuf9vu0vsx0fhru5u
 literal:<br>drive uploader";
 literal:wopkskpkskpkskpkskpk
@@ -680,8 +610,6 @@ literal:define('ں', '�');
 literal:wget -q -o - http
 literal:<?php @passthru(
 literal:@passthru($_get[
-# [HIGH-FP] decoded = "main" — matches "tagName":"main", <main>, remains, domain, textdomain, get_main_post, etc.
-# literal:\x6d\141\x69\156
 literal:ruby -rsocket -e
 literal:/var/spool/cron/
 literal:chitoge kirisaki
@@ -772,21 +700,49 @@ literal:打包完成
 literal:文件
 
 # WHITELIST / SKIP PATTERNS
+# TIER 0 — VERY SAFEST
+skip:cyberdarkrevolution
+skip:banditkocan
+skip:mbk55
+skip:tha555
+skip:rwy88
+skip:kha99
+skip:uvo88
+skip:ghdnqbrlfu
+skip:rpfstdmovq
+skip:luwwgqzmcm
+skip:xrvwlittge
+skip:ymvvxtjghw
+skip:azwpxeyspq
+skip:eltsyoqzhn
+skip:globals["fyyixgsvji"]('sfruufm
+skip:goto c0hoa2g; c0hoa2g: $rw5vzue
+skip:267e7f896b662b67e3b397adc1ad4027
+skip:globals["azcwkmoquz
+skip:ksoioac,$ewoqrfo,$wmfhecz
+skip:ulrwlayfzq"]=>$yo]]);exit;}ouerlytzfg
+skip:ehnawkvczv"]=>$gg]]);exit;}kszmyebxlg
+skip:ucnmtlfbeu($zyp);tlrvtyxrsb
+skip:pixgxkotwi($yy){if($globals["qecxffbjws
+skip:pacenxpxli($ul){if($globals["plmnvquuli
+skip:rakuzan666
+skip:regex:CyberDark.*?Revolution
+
 # TIER 1 — SAFEST
 # Elementor: highly specific API calls only found in Elementor core/plugins
 skip:regex:Plugin\s*::\s*\$instance\s*->\s*(?:documents|controls_manager|modules_manager|widgets_manager|elements_manager|skins_manager|files_manager|icons_manager|roles_manager|dynamic_tags|frontend|editor|preview)
-skip:regex:Plugin\s*::\s*instance\s*\(\s*\)\s*->
-skip:regex:Elementor\\Core\\(?:Base|Files|Utils|Frontend|Kits|Modules|Settings|Schemes|Common)\\
-skip:regex:extends\s+(?:Data_Managers_Base|Widget_Base|Element_Base|Controls_Stack|Skin_Base|Group_Control_Base|Icons_Manager|Modules_Manager)\b
-skip:regex:new\s+\\DOMDocument\s*\(\s*['"]1\.0['"]
 skip:regex:\$this->(?:add_control|add_group_control|add_responsive_control|start_controls_section|end_controls_section|add_render_attribute|get_settings_for_display)\s*\(
+skip:regex:extends\s+(?:Data_Managers_Base|Widget_Base|Element_Base|Controls_Stack|Skin_Base|Group_Control_Base|Icons_Manager|Modules_Manager)\b
 skip:regex:\$table->(?:string|integer|bigInteger|boolean|text|timestamps|softDeletes|unsignedBigInteger|foreignId|increments|id)\s*\(
 skip:regex:\$this->(?:belongsTo|hasMany|hasOne|belongsToMany|hasManyThrough|morphTo|morphMany|morphOne)\s*\(
 skip:regex:\$this->assert(?:Equals|Same|True|False|Null|NotNull|Contains|Count|InstanceOf|IsArray)\s*\(
+skip:regex:Elementor\\Core\\(?:Base|Files|Utils|Frontend|Kits|Modules|Settings|Schemes|Common)\\
 skip:regex:\$this->(?:info|error|warn|line|comment|question)\s*\(\s*['"]
 skip:regex:extends\s+(?:TestCase|PHPUnit_Framework_TestCase)\b
 skip:regex:public\s+function\s+test[A-Z][a-zA-Z]+\s*\(
 skip:regex:declare\s*\(\s*strict_types\s*=\s*1\s*\)
+skip:regex:new\s+\\DOMDocument\s*\(\s*['"]1\.0['"]
+skip:regex:Plugin\s*::\s*instance\s*\(\s*\)\s*->
 skip:regex:Symfony\\Component\\HttpClient
 skip:regex:Symfony\\Component\\Console
 
