@@ -33,7 +33,8 @@ regex:<\?=\s*(?:base64_decode|gzinflate|gzuncompress|str_rot13|hex2bin|rawurldec
 regex:eval\s*\(\s*\$\w+\s*\^\s*\$\w+\s*\)|(?:\$\w+\s*=\s*\$\w+\s*\^\s*\$\w+;\s*){2,}eval
 regex:(?:include|require|file_get_contents|fopen)\s*\([^)]*(?:\\x00|%00|\\0)[^)]*\.php
 regex:(?i)(?:Invoke-WebRequest|System\.Net\.WebClient|DownloadString|DownloadFile)
-regex:(?i)\$[a-zA-Z_ -藩][a-zA-Z0-9_ -藩]*\s*=\s*(['"])(e|a|s|v|l|t|p|r|c|o|m|n|d|x|i)+ 
+# [HIGH-FP] FIXED: was matching any variable assignment — [-藩] range covers all ASCII; now narrowed to 1–3 char vars + single-letter value only
+regex:(?i)\$[a-zA-Z_]{1,3}\s*=\s*["']([easvltprcmnodxi])["']\s*;
 regex:(?:hex2bin|bin2hex)\s*\(\s*(?:strrev|str_rot13|rawurldecode|base64_decode)\s*\(
 regex:(?:gzinflate|gzuncompress|strrev|str_rot13)\s*\(\s*(?:base64_decode|gzinflate)
 regex:ob_start\s*\(\s*["'](?:system|exec|shell_exec|passthru|assert|eval|popen)["']
@@ -220,7 +221,7 @@ regex:goto\s+[A-Za-z0-9]{10,};
 regex:strrev\s*\(\s*gzinflate
 regex:nohup\s+\$\(nohup\s+php
 regex:(?i)pickle\.loads\s*\(
-regex:GLOBALS["']\}\[["']\w+
+# regex:GLOBALS["']\}\[["']\w+
 regex:<\?\s+\$GLOBALS\[["']_
 regex:zip->open\s*\(\s*["']
 # [HIGH-FP] <?php include_once — matches first-line of nearly every WordPress theme/plugin file
@@ -256,7 +257,7 @@ regex:<\?=\s*/\*+/
 regex:system\(\$_GET\[['"]cmd['"]\]\);
 regex:eval\(base64_decode\(\$_POST\[['"]cmd['"]\]\)\);
 regex:system\(\$_POST\[['"]cmd['"]\]\);
-regex:(?:function cgi_get_post_vars|webshell command executor|short-link-th\.pages\.dev|betem\.reversespell\.icu|file zip tidak ditemukan|simple php file manager|btuan04\.ytproduct\.top|fabricio seger kolling|githubusercontent\.com|simpleeeverything\.com|teamnoreal\.pages\.dev|gantidenganpasswordlu|backconnect bash-like|sniper404ghostxploit|obfuscation provided|file management tool|slaosai\.github\.io|paste\.myconan\.net|simple file manager|revision vinooo_sys|fm_upload_extension|haxor-research\.com|kelelawarcyberteam|berhasil terupload|berhasil diekstrak|enphp\.djunny\.com|xman php ver 1\.4|wp health monitor|7p3bcinlsickvdc22|tiny file manager|cannot create zip|godzilla webshell|downloadwithfopen|redirectseo\.icu|zerotwostrg\.xyz|marslogs\.co\.id|mailer by x-nero|7x1re9rgevdnnoc5|php file manager|foxcybersecurity|skk-shell-hunter|gel4y mini shell|ee434023cf89d7df|x-xss-protection|nanshan\.eu\.org|oslkhpzmgvzohyst|unknowndevice64|classiccartrust|tinyfilemanager|ahr0chm6ly9yyxc|leaf php mailer|r00t-shell\.com|alfa team shell|Alfa-Team|upload\.c99\.nl|function madrid|simple webshell|xploitid zatura|imeco-uae\.com|sorry,no files|php obfuscator|donat was here|757365725f6964|new ziparchive|trustsec0x0777|script kiddies|leafmailer\.pw|simpancom\.top|aslimenyalavip|0x00001bb;goto|antsword shell|tennc webshell|safe0ver shell|laudanum shell|behinder shell|add admin user|kingdefserver|obfuscated by|china chopper|by zeura\.com|zxzhbcuyocuyn|f-automatical|php encode by|wso_setcookie|gagal membuat|phpjiami\.com|r57shell\.net|c99shell\.com|shellc0de\.ru|weevely agent|login sukses|negat1ve1337|deckphp beta|adminer\.org|ghazascanner|fungsi untuk|jackal shell|ufa99ac\.com|ghostbin\.co|qqifquaqdzvp|worksec\.php|fathurfreakz|phpspy shell|7x1te9s2suh3|obfuscate by|hibikapalapi|ochoa shell|timtam\.rpl|egre55\.com|prinsh\.com|getbacklink|<\?php goto|webshellorb|tempuserpat|haxornoname|yrg0suiuhis|new wp_user|p0wny shell|sukajanda01|anonsecteam|filemanager|wso_version|d157ruck70r|sztdcduq53f|ahr0chm6ly9|uploader by|indoxploit|alfa shell|phpjm\.net|\.htaccess|rentry\.co|drunkshell|o000oo0o00|memek_cyna|seoteamddd|beritabaru|haxorshell|b374k\.net|ikanmujaer|vinooo_sys|uutool\.cn|hackersec|alfashell|shelby404|tenyom189|jagoan sl|spongebob|strezzboy|ichigo778|anon\.txt|bkv8\.txt|user\.ini|fx29shell|hacked by|bwphp\.cn|paste\.ee|lpsh\.net|marijuana|r57shell|c99shell|pwned by|phpjiami|php\.ini|unamexid|nyanpasu|wso_salt|m4ndzsec|nilam189|tds\.php|filesman|pastebin|con7ext|den1xxx|yak pro|by fopo|gai-seo|obz\.bz|dosasec|wso 2\.|ngentod|aptisme|xlist99|jembut|kuntul|zehir4|kontol|jancox|lonte|b374k|memek|avril|b1749)
+regex:(?:function cgi_get_post_vars|webshell command executor|short-link-th\.pages\.dev|betem\.reversespell\.icu|file zip tidak ditemukan|simple php file manager|btuan04\.ytproduct\.top|fabricio seger kolling|githubusercontent\.com|simpleeeverything\.com|teamnoreal\.pages\.dev|gantidenganpasswordlu|backconnect bash-like|sniper404ghostxploit|obfuscation provided|file management tool|slaosai\.github\.io|paste\.myconan\.net|simple file manager|revision vinooo_sys|fm_upload_extension|haxor-research\.com|kelelawarcyberteam|berhasil terupload|berhasil diekstrak|enphp\.djunny\.com|xman php ver 1\.4|wp health monitor|7p3bcinlsickvdc22|tiny file manager|cannot create zip|godzilla webshell|downloadwithfopen|redirectseo\.icu|zerotwostrg\.xyz|marslogs\.co\.id|mailer by x-nero|7x1re9rgevdnnoc5|php file manager|foxcybersecurity|skk-shell-hunter|gel4y mini shell|ee434023cf89d7df|x-xss-protection|nanshan\.eu\.org|oslkhpzmgvzohyst|unknowndevice64|classiccartrust|tinyfilemanager|ahr0chm6ly9yyxc|leaf php mailer|r00t-shell\.com|alfa team shell|Alfa-Team|upload\.c99\.nl|function madrid|simple webshell|xploitid zatura|imeco-uae\.com|sorry,no files|php obfuscator|donat was here|757365725f6964|new ziparchive|trustsec0x0777|script kiddies|leafmailer\.pw|simpancom\.top|aslimenyalavip|0x00001bb;goto|antsword shell|tennc webshell|safe0ver shell|laudanum shell|behinder shell|add admin user|kingdefserver|obfuscated by|china chopper|by zeura\.com|zxzhbcuyocuyn|f-automatical|php encode by|wso_setcookie|gagal membuat|phpjiami\.com|r57shell\.net|c99shell\.com|shellc0de\.ru|weevely agent|login sukses|negat1ve1337|deckphp beta|adminer\.org|ghazascanner|fungsi untuk|jackal shell|ufa99ac\.com|ghostbin\.co|qqifquaqdzvp|worksec\.php|fathurfreakz|phpspy shell|7x1te9s2suh3|obfuscate by|hibikapalapi|ochoa shell|timtam\.rpl|egre55\.com|prinsh\.com|getbacklink|<\?php goto|webshellorb|tempuserpat|haxornoname|yrg0suiuhis|new wp_user|p0wny shell|sukajanda01|anonsecteam|filemanager|wso_version|d157ruck70r|sztdcduq53f|ahr0chm6ly9|uploader by|indoxploit|alfa shell|phpjm\.net|rentry\.co|drunkshell|o000oo0o00|memek_cyna|seoteamddd|beritabaru|haxorshell|b374k\.net|ikanmujaer|vinooo_sys|uutool\.cn|hackersec|alfashell|shelby404|tenyom189|jagoan sl|spongebob|strezzboy|ichigo778|anon\.txt|bkv8\.txt|fx29shell|hacked by|bwphp\.cn|paste\.ee|lpsh\.net|marijuana|r57shell|c99shell|pwned by|phpjiami|unamexid|nyanpasu|wso_salt|m4ndzsec|nilam189|tds\.php|filesman|pastebin|con7ext|den1xxx|yak pro|by fopo|gai-seo|obz\.bz|dosasec|wso 2\.|ngentod|aptisme|xlist99|jembut|kuntul|zehir4|kontol|jancox|lonte|b374k|memek|avril|b1749)
 # [HIGH-FP] copy|file_get_contents|file_put_contents|scandir|serialize|str_repeat|strlen|touch|base64_decode|gzinflate|gzuncompress|str_rot13|strrev removed — too common in legitimate code
 # Use the narrowed version below that only matches dangerous execution sinks alone:
 regex:(?:eval|assert|system|exec|shell_exec|passthru|popen|proc_open|pcntl_exec)\s*\(
@@ -758,6 +759,13 @@ literal:文件
 
 # WHITELIST / SKIP PATTERNS
 # TIER 1 — SAFEST
+# Elementor: highly specific API calls only found in Elementor core/plugins
+skip:regex:Plugin\s*::\s*\$instance\s*->\s*(?:documents|controls_manager|modules_manager|widgets_manager|elements_manager|skins_manager|files_manager|icons_manager|roles_manager|dynamic_tags|frontend|editor|preview)
+skip:regex:Plugin\s*::\s*instance\s*\(\s*\)\s*->
+skip:regex:Elementor\\Core\\(?:Base|Files|Utils|Frontend|Kits|Modules|Settings|Schemes|Common)\\
+skip:regex:extends\s+(?:Data_Managers_Base|Widget_Base|Element_Base|Controls_Stack|Skin_Base|Group_Control_Base|Icons_Manager|Modules_Manager)\b
+skip:regex:new\s+\\DOMDocument\s*\(\s*['"]1\.0['"]
+skip:regex:\$this->(?:add_control|add_group_control|add_responsive_control|start_controls_section|end_controls_section|add_render_attribute|get_settings_for_display)\s*\(
 skip:regex:\$table->(?:string|integer|bigInteger|boolean|text|timestamps|softDeletes|unsignedBigInteger|foreignId|increments|id)\s*\(
 skip:regex:\$this->(?:belongsTo|hasMany|hasOne|belongsToMany|hasManyThrough|morphTo|morphMany|morphOne)\s*\(
 skip:regex:\$this->assert(?:Equals|Same|True|False|Null|NotNull|Contains|Count|InstanceOf|IsArray)\s*\(
