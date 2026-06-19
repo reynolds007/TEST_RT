@@ -247,6 +247,15 @@ regex:(?:function cgi_get_post_vars|webshell command executor|short-link-th\.pag
 regex:(?:eval|assert|system|exec|shell_exec|passthru|popen|proc_open|pcntl_exec|copy|file_get_contents|file_put_contents|scandir|serialize|str_repeat|strlen|touch|base64_decode|gzinflate|gzuncompress|str_rot13|strrev)\s*\(
 
 # === BACKDOOR LITERAL PATTERNS ===
+literal:>".gzinflate("
+literal:github.com/whoami-45
+literal:by unknown45
+literal:ini_get("disable_functions");
+literal:WebShellOrb 2.
+literal:d6efdf6528b7edb8ecf223d010af1362
+literal:Xclusiv-3D
+literal:Anonymous
+literal:ini_set('display_errors','Off');
 literal:$in{$key} .= $val;}if($in{"cmd"}){print decode_base64($in{"check"})."<pre>";system(decode_base64($in{"cmd"}));
 literal:<pre>#{ view.getclass().getclassloader().loadclass("java.util.scanner").getmethod("next").invoke(
 literal:if (strpos($_session['currentdir'],str_replace('\\','/',$_server['document_root'])) === false)
