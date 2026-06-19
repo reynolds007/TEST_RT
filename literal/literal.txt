@@ -34,7 +34,6 @@ regex:unserialize\s*\(\s*(?:base64_decode\s*\(|\$_(?:GET|POST|REQUEST|COOKIE|SES
 regex:<\?=\s*(?:base64_decode|gzinflate|gzuncompress|str_rot13|hex2bin|rawurldecode)\s*\(
 regex:eval\s*\(\s*\$\w+\s*\^\s*\$\w+\s*\)|(?:\$\w+\s*=\s*\$\w+\s*\^\s*\$\w+;\s*){2,}eval
 regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)\s*(?:&&|\?\?|and)\s*shell_exec\s*\(
-regex:(?i)\$[a-zA-Z_ -藩][a-zA-Z0-9_ -藩]*\s*=\s*(['"])(e|a|s|v|l|t|p|r|c|o|m|n|d|x|i)+ 
 regex:(?:include|require|file_get_contents|fopen)\s*\([^)]*(?:\\x00|%00|\\0)[^)]*\.php
 regex:(?:hex2bin|bin2hex)\s*\(\s*(?:strrev|str_rot13|rawurldecode|base64_decode)\s*\(
 regex:(?:gzinflate|gzuncompress|strrev|str_rot13)\s*\(\s*(?:base64_decode|gzinflate)
@@ -147,7 +146,6 @@ regex:\$\w+=\s*['"]0x[0-9a-f]+(?:\.0x[0-9a-f]+){3}
 regex:move_uploaded_file\s*\(\s*(?:\$_FILES|\$\w+)
 regex:passthru\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
 regex:new\s+COM\s*\(\s*['"]WScript\.Shell['"]\s*\)
-regex:(?i)(?: |_)b[a-zA-Z0-9]{5}_d[a-zA-Z0-9]{4} 
 regex:(?i)certutil\.exe\s+(?:-urlcache|-f|-split)
 regex:password\s*=\s*["']\w+["'];\s*//\s*password
 regex:document\.write\s*\(\s*unescape\s*\(\s*["']
@@ -699,7 +697,6 @@ literal:0x@@1337
 literal:*/eval/*
 literal:<?=exec(
 literal:$oooooo
-literal:/* doom
 literal:$o00oo0
 literal:/*****/
 literal:/ninja\
