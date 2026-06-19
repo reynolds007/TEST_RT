@@ -34,8 +34,8 @@ regex:unserialize\s*\(\s*(?:base64_decode\s*\(|\$_(?:GET|POST|REQUEST|COOKIE|SES
 regex:<\?=\s*(?:base64_decode|gzinflate|gzuncompress|str_rot13|hex2bin|rawurldecode)\s*\(
 regex:eval\s*\(\s*\$\w+\s*\^\s*\$\w+\s*\)|(?:\$\w+\s*=\s*\$\w+\s*\^\s*\$\w+;\s*){2,}eval
 regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)\s*(?:&&|\?\?|and)\s*shell_exec\s*\(
-regex:(?:include|require|file_get_contents|fopen)\s*\([^)]*(?:\\x00|%00|\\0)[^)]*\.php
 regex:(?i)\$[a-zA-Z_ -藩][a-zA-Z0-9_ -藩]*\s*=\s*(['"])(e|a|s|v|l|t|p|r|c|o|m|n|d|x|i)+ 
+regex:(?:include|require|file_get_contents|fopen)\s*\([^)]*(?:\\x00|%00|\\0)[^)]*\.php
 regex:(?:hex2bin|bin2hex)\s*\(\s*(?:strrev|str_rot13|rawurldecode|base64_decode)\s*\(
 regex:(?:gzinflate|gzuncompress|strrev|str_rot13)\s*\(\s*(?:base64_decode|gzinflate)
 regex:ob_start\s*\(\s*["'](?:system|exec|shell_exec|passthru|assert|eval|popen)["']
@@ -49,131 +49,132 @@ regex:<\?php\s+function\s+customdir\(\)\s*\{.*function_exists\(["']getcwd["']\)
 regex:["']ev["']\s*\.\s*["']al["']|["']e["']\s*\.\s*["']va["']\s*\.\s*["']l["']
 regex:["']?authorize["']?:\s*["']?0["']?,\s*["']?login["']?:\s*["']?admin["']?
 regex:define\s*\(\s*['"][^\x00-\x7F]{1,4}['"]\s*,\s*['"][^\x00-\x7F]+['"]\s*\)
-regex:\$_(?:GET|POST|REQUEST)\s*\[\s*(['"])(cmd|exec|shell|system|eval)\1\s*\]
 regex:(?:include|require)(?:_once)?\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
-regex:["']lang["']:\s*["']en["'],\s*["']error_reporting["']:\s*(?:true|false)
+regex:\$_(?:GET|POST|REQUEST)\s*\[\s*(['"])(cmd|exec|shell|system|eval)\1\s*\]
 regex:(?:system|exec|shell_exec|passthru)\s*\(\s*["']cmd(?:\.exe)?\s+/[cC]\s+
+regex:["']lang["']:\s*["']en["'],\s*["']error_reporting["']:\s*(?:true|false)
 regex:str_rot13\s*\(\s*base64_decode\s*\(|base64_decode\s*\(\s*str_rot13\s*\(
 regex:\$(?:smtp_pass|mail_pass|pass|password)\s*=\s*\$_(?:POST|GET|REQUEST)\[
+regex:(?:AddType\s+application/x-httpd-(?:php|cgi)|php_value\s+\w+\s+\d{6,})
 regex:["']g["']\.["']z["']\.["']un["']\.["']compr["']\.["']e["']\.["']ss["']
 regex:<\?php\s+@copy\s*\(\s*\$_FILES\[["']?file["']?\]\[["']?tmp_name["']?\]
-regex:(?:AddType\s+application/x-httpd-(?:php|cgi)|php_value\s+\w+\s+\d{6,})
 regex:chr\s*\(\s*ord\s*\(\s*\$([a-zA-Z_]+)\s*\[\s*\$i\s*\]\s*\)\s*-\s*1\s*\)
 regex:(?:\.\./){3,}|(?:\.\.\\){3,}|(?:%2e%2e%2f){2,}|(?:%252e%252e%252f){2,}
-regex:call_user_func(?:_array)?\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
 regex:eval\s*\(\s*html_entity_decode\s*\(\s*gzinflate\s*\(\s*base64_decode
+regex:call_user_func(?:_array)?\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
 regex:@(?:include|require)(?:_once)?\s*\(\s*(?:["']\\0|["']\\x|["']/\.\.)
-regex:(?:wget|curl)\b[^;|&\n]{0,100}\|\s*(?:bash|sh|php|perl|python3?)\b
 regex:(?i)(nc\s+-e\s+(?:/bin/sh|/bin/bash|cmd\.exe)|/bin/bash\s+-i\s+>&)
+regex:(?:wget|curl)\b[^;|&\n]{0,100}\|\s*(?:bash|sh|php|perl|python3?)\b
+regex:["'][^"']*UNION\s+(?:ALL\s+)?SELECT\s+(?:NULL,?\s*){2,}[^"']*["']
 regex:\\x3[Cc]\\x3[Ff](?:php)?|%3[Cc]%3[Ff](?:%70%68%70)?|\{0x3c,0x3f\}
 regex:name=["']_upl["']\s+type=["']submit["']\s+id=["']_upl["']\s+value
 regex:session_start\(\);\s*\$\w+=["']1["'];\s*if\s*\(\$\w+==["']1["']\)
 regex:(?:eval|assert)\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE|SERVER)\s*\[
-regex:["'][^"']*UNION\s+(?:ALL\s+)?SELECT\s+(?:NULL,?\s*){2,}[^"']*["']
 regex:mail\s*\(\s*stripslashes\s*\(\s*base64_decode\s*\(\s*\$\w+\[0\]
 regex:(?:file_get_contents|\$\w+)\s*\(\s*__FILE__\s*\)\s*,\s*-\d{4,}
 regex:stream_socket_client\s*\(\s*\(0x[0-9a-f]+(?:,\s*0x[0-9a-f]+)+
 regex:htmlspecialchars_decode\s*\(\s*urldecode\s*\(\s*base64_decode
+regex:preg_replace\s*\([^,]+/e['"][^,]*,\s*\$_(?:POST|GET|REQUEST)
 regex:discord(?:app)?\.com/api/webhooks/\d{17,}/[A-Za-z0-9_-]{60,}
 regex:ActiveXObject\s*\(\s*['"]WScript\.(?:Shell|Network)['"]\s*\)
-regex:preg_replace\s*\([^,]+/e['"][^,]*,\s*\$_(?:POST|GET|REQUEST)
 regex:pack\s*\(\s*["']H\*["']\s*,\s*["'][0-9a-fA-F]{20,}["']\s*\)
 regex:preg_replace\s*\(\s*["'][^"']*\/[a-zA-Z]*e[a-zA-Z]*["']\s*,
 regex:(?i)\$[a-zA-Z_]{1,3}\s*=\s*["']([easvltprcmnodxi])["']\s*;
 regex:\$\w+\s*=\s*["'](?:\\x[0-9a-fA-F]{2}|\\[0-7]{2,3}){4,}["']
 regex:\$\{\s*["'](?:\\x[0-9a-fA-F]{2}|\\[0-7]{2,3}){3,}["']\s*\}
-regex:define\s*\(\s*["']DB_USER["']\s*,\s*["']username_here["']
 regex:base64_decode\s*\(\s*['"]([a-zA-Z0-9+\/=]{300,})['"]\s*\)
 regex:pcntl_exec\s*\(\s*["'](?:/bin/|/usr/bin/|/usr/local/bin/)
 regex:["']gzin["']\.["']f["']\.["']l["']\.["']a["']\.["']te["']
 regex:@?eval\s*\(\s*(?:\$\w+\s*\(|\$_(?:POST|GET|REQUEST)\s*\[)
 regex:\$\w+\s*=\s*["']base["'];\s*\$\w+\s*=\s*["']64_decode["']
 regex:include\s+["'](?:\\[0-9a-fx]+)+["']\.basename\(__FILE__\)
+regex:define\s*\(\s*["']DB_USER["']\s*,\s*["']username_here["']
 regex:gzinflate\s*\(\s*substr\s*\(\s*base64_decode\s*\(\s*["']
 regex:(?:INTO\s+OUTFILE|INTO\s+DUMPFILE)\s+["'][^"']*\.php["']
 regex:eval\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\(\s*\$\w+
+regex:chr\(\d+(?:[+\-*]\d+)*\)(?:\.chr\(\d+(?:[+\-*]\d+)*\))+
 regex:(?i)eval\s*\(\s*(?:req|request)\.(?:body|query|headers)
 regex:(?i)__import__\s*\(\s*['"]os['"]\s*\)\.(?:system|popen)
 regex:ini_set\s*\(\s*["']disable_functions["']\s*,\s*["']['"]
-regex:chr\(\d+(?:[+\-*]\d+)*\)(?:\.chr\(\d+(?:[+\-*]\d+)*\))+
 regex:["']f["']\.["']ile_get["']\.["']_conte["']\.["']nts["']
-regex:\$2[abxy]\$(?:0[4-9]|[12]\d|3[01])\$[A-Za-z0-9./]{53}
-regex:gzinflate\s*\(\s*['"]([a-zA-Z0-9+\/=]{300,})['"]\s*\)
-regex:\$\{\$\{["'](?:\\x[0-9a-fA-F]{2}|\\[0-9]{1,3})+["']\}
-regex:(?i)curl\s+(?:-s\s+|-O\s+)?https?://.*\|.*(?:bash|sh)
-regex:(?i)wget\s+(?:-q\s+|-O\s+)?https?://.*\|.*(?:bash|sh)
-regex:(?i)file_get_contents\s*\(\s*['"]php://input['"]\s*\)
 regex:(?i)wp_remote_get\s*\(\s*['"]https?://[^'"]+\.txt['"]
+regex:\$\{\$\{["'](?:\\x[0-9a-fA-F]{2}|\\[0-9]{1,3})+["']\}
+regex:gzinflate\s*\(\s*['"]([a-zA-Z0-9+\/=]{300,})['"]\s*\)
+regex:\$2[abxy]\$(?:0[4-9]|[12]\d|3[01])\$[A-Za-z0-9./]{53}
+regex:(?i)file_get_contents\s*\(\s*['"]php://input['"]\s*\)
 regex:str_rot13\s*\(\s*['"]([a-zA-Z0-9+\/=]{300,})['"]\s*\)
+regex:(?i)wget\s+(?:-q\s+|-O\s+)?https?://.*\|.*(?:bash|sh)
+regex:(?i)curl\s+(?:-s\s+|-O\s+)?https?://.*\|.*(?:bash|sh)
 regex:<\?php\s+\$\{["'](?:\\x[0-9a-fA-F]{2}|[A-Z0-9])+["']
 regex:["']base6["']\.["']4["']\.["']_deco["']\.["']de["']?
 regex:base64_encode\s*\(\s*hex2bin\s*\(\s*\$_REQUEST\[["']
-regex:\$_FILES\[["']file_upload["']\]\[["']tmp_name["']\]
 regex:["']base64["']\.["']_["']\.["']enc["']\.["']ode["']
 regex:["']bas["']\.["']e64["']\.["']_deco["']\.["']de["']
 regex:\$wpdb\s*->\s*insert\s*\(\s*\$wpdb\s*->\s*users\s*,
+regex:\$_FILES\[["']file_upload["']\]\[["']tmp_name["']\]
 regex:\$\$\w+\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
+regex:["']st["']\.["']r["']\.["']_replac["']\.["']e["']
+regex:file_put_contents\s*\(\s*[^,]+,\s*\$_(?:POST|GET)
 regex:\$\{\s*\$_(?:GET|POST|REQUEST|COOKIE)\[.*?\]\s*\}
 regex:isset\(\$_POST\[["']c["']\]\).*@file_get_contents
-regex:file_put_contents\s*\(\s*[^,]+,\s*\$_(?:POST|GET)
-regex:["']st["']\.["']r["']\.["']_replac["']\.["']e["']
-regex:(?i)python\s+-c\s+['"]import\s+(?:socket|pty|os)
-regex:strval\s*\(\s*basename\s*\(\s*["']/var/www/html/
-regex:eval\s*\(\s*["'](?:\\[0-9]{2,3}|\\x[0-9a-f]{2})+
 regex:eval\(base64_decode\(\$_POST\[['"]cmd['"]\]\)\);
+regex:strval\s*\(\s*basename\s*\(\s*["']/var/www/html/
+regex:(?i)python\s+-c\s+['"]import\s+(?:socket|pty|os)
 regex:substr\s*\(\s*str_shuffle\s*\(\s*str_repeat\s*\(
-regex:["']gzin["']\.["']f["']\.["']la["']\.["']te["']
-regex:eval\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
+regex:eval\s*\(\s*["'](?:\\[0-9]{2,3}|\\x[0-9a-f]{2})+
 regex:["']s["']\.["']tr["']\.["']_ro["']\.["']t13["']
-regex:hex2bin\s*\(\s*['"]([0-9a-fA-F]{300,})['"]\s*\)
-regex:(?i)subprocess\.(?:Popen|call|check_output|run)
 regex:["']st["']\.["']r["']\.["']_rot["']\.["']13["']
-regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)
-regex:pack\s*\(\s*["']H\*["'],\s*str_rot13\s*\(\s*\$
+regex:(?i)subprocess\.(?:Popen|call|check_output|run)
+regex:hex2bin\s*\(\s*['"]([0-9a-fA-F]{300,})['"]\s*\)
+regex:eval\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
+regex:["']gzin["']\.["']f["']\.["']la["']\.["']te["']
 regex:shell_exec\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
 regex:(?i)pty\.spawn\s*\(\s*['"]/bin/(?:bash|sh)['"]
-regex:dl\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
-regex:gz(?:inflate|uncompress)\s*\(\s*base64_decode
+regex:pack\s*\(\s*["']H\*["'],\s*str_rot13\s*\(\s*\$
+regex:function_exists\s*\(\s*['"]shell_exec['"]\s*\)
 regex:eval\s*\(\s*\w+\s*\(\s*["'][A-Za-z0-9+/=]{6,}
-regex:["'][a-z]{1,5}\\x[0-9a-fA-F]{2}[a-z]{0,8}["']
 regex:if\s*\(\s*\$_POST\[["']_upl["']\]\s*==\s*["']
 regex:\$\w+\s*=\s*["'](?:\\x[0-9a-fA-F]{2}){6,}["']
-regex:\$\w+=\s*['"]0x[0-9a-f]+(?:\.0x[0-9a-f]+){3}
-regex:passthru\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
-regex:new\s+COM\s*\(\s*['"]WScript\.Shell['"]\s*\)
+regex:dl\s*\(\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
+regex:gz(?:inflate|uncompress)\s*\(\s*base64_decode
+regex:["'][a-z]{1,5}\\x[0-9a-fA-F]{2}[a-z]{0,8}["']
 regex:hex2bin\s*\(\s*["'][0-9a-fA-F]{40,}["']\s*\)
 regex:(?:\$_[a-z]=['"][a-z0-9_]+['"]\s*;?\s*){10,}
 regex:create_function\s*\(\s*["'][^"']*["']\s*,\s*
 regex:eval\s*\(\s*(?:base64_decode|gzinflate)\s*\(
 regex:chr\(\d{2,3}\)(?:\s*\.\s*chr\(\d{2,3}\)){3,}
+regex:\$\w+=\s*['"]0x[0-9a-f]+(?:\.0x[0-9a-f]+){3}
 regex:move_uploaded_file\s*\(\s*(?:\$_FILES|\$\w+)
-regex:file_put_contents\s*\(\s*[^,]+\.php['"]\s*,
-regex:chr\(\d+\)(?:\.chr\(\d+\)){3,}(?:\(|;|\s*=)
-regex:if\s*\(\$\w+==["']d["']\s+or\s+\$\w+==["']m
+regex:passthru\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
+regex:new\s+COM\s*\(\s*['"]WScript\.Shell['"]\s*\)
 regex:(?i)(?: |_)b[a-zA-Z0-9]{5}_d[a-zA-Z0-9]{4} 
 regex:(?i)certutil\.exe\s+(?:-urlcache|-f|-split)
 regex:password\s*=\s*["']\w+["'];\s*//\s*password
 regex:document\.write\s*\(\s*unescape\s*\(\s*["']
 regex:add_action\(["']init["'],\s*create_function
 regex:\$\w+\s*\.=\s*["'][A-Za-z0-9+/=]{50,}["'];?
-regex:(?:GIF89a?|PNG|JFIF|EXIF|BM)\S{0,20}<\?php
-regex:a:\d+:\{s:\d+:["']administrator["'];b:1;\}
-regex:file_put_contents\s*\(\s*\$\w+,\s*\$\w+\);
-regex:base64_decode\s*\(\s*\$_POST\[["']z0["']\]
+regex:file_put_contents\s*\(\s*[^,]+\.php['"]\s*,
+regex:chr\(\d+\)(?:\.chr\(\d+\)){3,}(?:\(|;|\s*=)
+regex:if\s*\(\$\w+==["']d["']\s+or\s+\$\w+==["']m
 regex:base_convert\s*\(\s*(?:bin2hex|@fileperms)
 regex:\$\{\s*\$_(?:GET|POST|REQUEST|COOKIE)\s*\[
 regex:["']e["']\.["']v["']\.["']a["']\.["']l["']
 regex:assert\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
 regex:\\x[0-9a-fA-F]{2}(?:\\x[0-9a-fA-F]{2}){5,}
 regex:system\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[
+regex:(?:GIF89a?|PNG|JFIF|EXIF|BM)\S{0,20}<\?php
+regex:a:\d+:\{s:\d+:["']administrator["'];b:1;\}
+regex:file_put_contents\s*\(\s*\$\w+,\s*\$\w+\);
+regex:base64_decode\s*\(\s*\$_POST\[["']z0["']\]
 regex:readfile\s*\(\s*base64_decode\s*\(\s*["']
 regex:(?i)new\s+Function\s*\(\s*(?:req|request)
 regex:eval\s+\(\s*['"]?>\s*['"]?\.\s*\$\w+\s*\)
 regex:mail\s*\(\s*\$_(?:POST|GET|REQUEST)\s*\[
 regex:eval\s*\(\s*\$\w+\s*\(\s*\$\w+\s*\)\s*\)
-regex:_COOKIE\[["']user_id["']\]\s*===\s*["']
 regex:CONCAT\(0x[0-9a-f]+(?:,\s*0x[0-9a-f]+)+
+regex:\\x20\\40\\40\\40\\x31\\11\\62\\11\\x33
 regex:(?i)fsockopen\s*\(\s*(['"])(tcp|udp)://
+regex:_COOKIE\[["']user_id["']\]\s*===\s*["']
 regex:hash\s*\(\s*["'](?:crc32|sha1|md5)["']
 regex:set_role\s*\(\s*["']administrator["']
 regex:eval\s*\(\s*base64_decode\s*\(\s*["']
@@ -186,76 +187,79 @@ regex:isset\s*\(\s*\$_POST\[["']unlock_pw
 regex:decode_base64\s*\(\s*\$\w+\{["']cmd
 regex:eval\s*\(\s*["']\\\$\w+\s*=\s*\$\w+
 regex:(?i)disable_functions\s*=\s*(none)
+regex:system\(\$_POST\[['"]cmd['"]\]\);
 regex:_GET\[["']Ghost["']\]\s*==\s*["']
 regex:isset\s*\(\s*\$_POST\[["']dounzip
-regex:system\(\$_POST\[['"]cmd['"]\]\);
 regex:<\?php\s+require_once\s*\(\s*["']
-regex:\\[0-7]{2,3}(?:\\[0-7]{2,3}){4,}
-regex:system\(\$_GET\[['"]cmd['"]\]\);
 regex:eXtRaCt\s*\(\s*_{4}\s*\(\s*\$\w+
+regex:system\(\$_GET\[['"]cmd['"]\]\);
+regex:\\[0-7]{2,3}(?:\\[0-7]{2,3}){4,}
 regex:(?:pack\s*\(['"][Vv]['"].*){3,}
 regex:@copy\s*\(\s*\$_FILES\[["']file
+regex:x69\\154\\x65\\144\\40\\x74\\x6
 regex:copy\s*\(\s*\$_FILES\[["']file
 regex:["']gzu["']\.["']ncompress["']
 regex:["']gzuncompres["']\.["']s["']
+regex:\\x47\\141\\x67\\x61\\x6c\\x20
+regex:\\x63\\150\\155\\157\\144\\137
+regex:\\141\\110\\x52\\x30\\x63\\x44
 regex:base64_decode\s*\(\s*["']MDA=
 regex:isset\s*\(\s*\$_POST\[["']act
-regex:isset\s*\(\s*\$_GET\[["']cmd
+regex:zx\\132hbcu\\x79ocu\\x79\\116
+regex:\\x77\\157\\x6e\\x67\\55\\x74
 regex:\$GLOBALS\[[^\x00-\x7F\]]+\]
-regex:zip->setPassword\s*\(\s*["']
-regex:include\s*\(\s*base64_decode
-regex:base64\.b64decode\s*\(\s*\w+
-regex:Array\s*\(\s*'co'\.'py'\s*\)
-regex:\$\w+\s*=\s*'gzuncompres[s']
 regex:\d{8,10}:AA[A-Za-z0-9_-]{33}
-regex:eval\s*\(\s*<<<[A-Z_]{2,}\b
+regex:\$\w+\s*=\s*'gzuncompres[s']
+regex:isset\s*\(\s*\$_GET\[["']cmd
+regex:Array\s*\(\s*'co'\.'py'\s*\)
+regex:base64\.b64decode\s*\(\s*\w+
+regex:include\s*\(\s*base64_decode
+regex:zip->setPassword\s*\(\s*["']
+regex:s\\x63\\x61\\x6e\\x64\\x69r
+regex:\\x47\\x4c\\x4fb\\x41l\\x53
 regex:file\s*=\s*["']worksec\.php
-regex:include\s*\(\s*['"]zip://
+regex:eval\s*\(\s*<<<[A-Z_]{2,}\b
+regex:\\x47\\x4cob\\x41\\x4c\\x53
 regex:sha1\s*\(\s*md5\s*\(\s*\$
 regex:@include\s*\(\s*["']\\057
-regex:\$\w+\s*=\s*["']xxx["'];
+regex:include\s*\(\s*['"]zip://
 regex:goto\s+[A-Za-z0-9]{10,};
+regex:\$\w+\s*=\s*["']xxx["'];
 regex:<\?php\s+include(_once)?
 regex:<\?php\s+eval/\*[^*]*\*/
-regex:strrev\s*\(\s*gzinflate
 regex:nohup\s+\$\(nohup\s+php
+regex:g\\x4co\\x42a\\x4c\\x53
+regex:g\\x4co\\x42\\x41l\\x53
+regex:\\x47\\x4co\\x42al\\x53
+regex:strrev\s*\(\s*gzinflate
 regex:\s+password\s*=\s*["']
-regex:GLOBALS["']\}\[["']\w+
 regex:<\?\s+\$GLOBALS\[["']_
 regex:(?i)pickle\.loads\s*\(
+regex:GLOBALS["']\}\[["']\w+
 regex:login_pass\s*=\s*["']
 regex:zip->open\s*\(\s*["']
-regex:(?i)perl\s+-MIO\s+-e
 regex:\$_REQUEST\[["']exec
-regex:\$_REQUEST\[["']cmd
+regex:(?i)perl\s+-MIO\s+-e
+regex:\\156\\x67\\141\\x7
 regex:include\s*\(\s*["']
+regex:\$_REQUEST\[["']cmd
+regex:goto\s+\w+;\s*\w+:
+regex:eval\s*\(\s*['"]?>
+regex:%PDF-\d+-\d+<\?php
 regex:eval\s*/\*[^*]*\*/
 regex:\$\w*hexurl\w*\s*=
-regex:%PDF-\d+-\d+<\?php
-regex:eval\s*\(\s*['"]?>
-regex:goto\s+\w+;\s*\w+:
-regex:<\?php\s+@require
 regex:eval\s*\(\s*\$\w+
 regex:type=["']file["']
-regex:\$z\s*\.=\s*["']
+regex:<\?php\s+@require
 regex:atob\s*\(\s*["']
+regex:\$z\s*\.=\s*["']
 regex:eval\(['"]\?>
-regex:<\?php\s+/\*
 regex:["']v3x3["']
 regex:<\?=\s*/\*+/
 regex:(?:function cgi_get_post_vars|webshell command executor|short-link-th\.pages\.dev|betem\.reversespell\.icu|file zip tidak ditemukan|simple php file manager|btuan04\.ytproduct\.top|fabricio seger kolling|githubusercontent\.com|simpleeeverything\.com|teamnoreal\.pages\.dev|gantidenganpasswordlu|backconnect bash-like|sniper404ghostxploit|obfuscation provided|file management tool|slaosai\.github\.io|paste\.myconan\.net|simple file manager|revision vinooo_sys|fm_upload_extension|haxor-research\.com|kelelawarcyberteam|berhasil terupload|berhasil diekstrak|enphp\.djunny\.com|xman php ver 1\.4|wp health monitor|7p3bcinlsickvdc22|tiny file manager|cannot create zip|godzilla webshell|downloadwithfopen|redirectseo\.icu|zerotwostrg\.xyz|marslogs\.co\.id|mailer by x-nero|7x1re9rgevdnnoc5|php file manager|foxcybersecurity|skk-shell-hunter|gel4y mini shell|ee434023cf89d7df|x-xss-protection|nanshan\.eu\.org|oslkhpzmgvzohyst|unknowndevice64|classiccartrust|tinyfilemanager|ahr0chm6ly9yyxc|leaf php mailer|r00t-shell\.com|alfa team shell|Alfa-Team|upload\.c99\.nl|function madrid|simple webshell|xploitid zatura|imeco-uae\.com|sorry,no files|php obfuscator|donat was here|757365725f6964|new ziparchive|trustsec0x0777|script kiddies|leafmailer\.pw|simpancom\.top|aslimenyalavip|0x00001bb;goto|antsword shell|tennc webshell|safe0ver shell|laudanum shell|behinder shell|add admin user|kingdefserver|obfuscated by|china chopper|by zeura\.com|zxzhbcuyocuyn|f-automatical|php encode by|wso_setcookie|gagal membuat|phpjiami\.com|r57shell\.net|c99shell\.com|shellc0de\.ru|weevely agent|login sukses|negat1ve1337|deckphp beta|adminer\.org|ghazascanner|fungsi untuk|jackal shell|ufa99ac\.com|ghostbin\.co|qqifquaqdzvp|worksec\.php|fathurfreakz|phpspy shell|7x1te9s2suh3|obfuscate by|hibikapalapi|ochoa shell|timtam\.rpl|egre55\.com|prinsh\.com|getbacklink|<\?php goto|webshellorb|tempuserpat|haxornoname|yrg0suiuhis|new wp_user|p0wny shell|sukajanda01|anonsecteam|filemanager|wso_version|d157ruck70r|sztdcduq53f|ahr0chm6ly9|uploader by|indoxploit|alfa shell|phpjm\.net|\.htaccess|rentry\.co|drunkshell|o000oo0o00|memek_cyna|seoteamddd|beritabaru|haxorshell|b374k\.net|ikanmujaer|vinooo_sys|uutool\.cn|hackersec|alfashell|shelby404|tenyom189|jagoan sl|spongebob|strezzboy|ichigo778|anon\.txt|bkv8\.txt|user\.ini|fx29shell|hacked by|bwphp\.cn|paste\.ee|lpsh\.net|marijuana|r57shell|c99shell|pwned by|phpjiami|php\.ini|unamexid|nyanpasu|wso_salt|m4ndzsec|nilam189|tds\.php|filesman|pastebin|con7ext|den1xxx|yak pro|by fopo|gai-seo|obz\.bz|dosasec|wso 2\.|ngentod|aptisme|xlist99|jembut|kuntul|zehir4|kontol|jancox|lonte|b374k|memek|avril|b1749)
 regex:(?:eval|assert|system|exec|shell_exec|passthru|popen|proc_open|pcntl_exec|copy|file_get_contents|file_put_contents|scandir|serialize|str_repeat|strlen|touch|base64_decode|gzinflate|gzuncompress|str_rot13|strrev)\s*\(
-
+    
 # === BACKDOOR LITERAL PATTERNS ===
-literal:>".gzinflate("
-literal:github.com/whoami-45
-literal:by unknown45
-literal:ini_get("disable_functions");
-literal:WebShellOrb 2.
-literal:d6efdf6528b7edb8ecf223d010af1362
-literal:Xclusiv-3D
-literal:Anonymous
-literal:ini_set('display_errors','Off');
 literal:$in{$key} .= $val;}if($in{"cmd"}){print decode_base64($in{"check"})."<pre>";system(decode_base64($in{"cmd"}));
 literal:<pre>#{ view.getclass().getclassloader().loadclass("java.util.scanner").getmethod("next").invoke(
 literal:if (strpos($_session['currentdir'],str_replace('\\','/',$_server['document_root'])) === false)
@@ -273,21 +277,20 @@ literal:=explode(" ",microtime());return((float)${${
 literal:$dir=$_request["uploaddir"];$dir=str_replace
 literal:pub-b610cc40e6f94f0c89cbcf3d40b59864.r2.dev
 literal:function download_files($dir_name='shell')
+literal:add_filter('the_content',create_function
 literal:43pvisoqhmwyde(0cjrl;27/b.5g1aft6*n8x9uz
 literal:add_filter("the_content",create_function
-literal:add_filter('the_content',create_function
 literal:python3 -c 'import socket,subprocess,os
 literal:eval(gzinflate(str_rot13(base64_decode(
 literal:eval(str_rot13(gzinflate(base64_decode(
 literal:python -c 'import socket,subprocess,os
 literal:kxxuxexkvuxzotm.6/a\x10fykyyouteyzgxz
-literal:echo perms(${${"g\x4co\x42a\x4c\x53"}
 literal:success. file available at: <a href=\
 literal:'https://s3.us-west-2.amazonaws.com'
-literal:ini_set('magic_quotes_runtime', 0);
-literal:move_uploaded_file(var_files('file'
 literal:visibility:hidden;position:absolute
 literal:protected $last_smtp_transaction_id
+literal:ini_set('magic_quotes_runtime', 0);
+literal:move_uploaded_file(var_files('file'
 literal:php://filter/convert.base64-decode
 literal:explode(',', fm_upload_extension);
 literal:.tmp < /dev/null &) < /dev/null &
@@ -295,6 +298,14 @@ literal:ini_set('max_execution_time', 0);
 literal:indexbase64[str.charcodeat(i++)];
 literal:while(false!=($c=fread($a,8080)))
 literal:@eval(gzuncompress(base64_decode(
+literal:xf1pl6nili4kf69f4z0n35odmonzghtx
+literal:2852bfe7fb8e86f1a0148e02049410c6
+literal:5f6503705f1ededa5f10473f73be316e
+literal:d6efdf6528b7edb8ecf223d010af1362
+literal:5176e3a8df366820458215a7d75ccab3
+literal:a6f452ec3293d7fb72c5b677257b20ec
+literal:ini_set('display_errors','Off');
+literal:26483dbd0a04d9d9a7cd55da49d3b4a1
 literal:e7994430873bbd8cfc5f8c8abdcf334e
 literal:016184083e2ff4d14ed948dfe5b72e1a
 literal:683ce9b1d91af441dec18dad25584421
@@ -304,7 +315,7 @@ literal:33e87c64976fe4070c9e108e7e36c571
 literal:c21f0fa15029137943759b9ee89d5988
 literal:52a517dcd0fe415742bac2affee21591
 literal:58ed7454272553f9b2e955c91b2bf37c
-literal:26483dbd0a04d9d9a7cd55da49d3b4a1
+literal:6a684f2c9a41df2c963a1ee7d17ce2a0
 literal:f702c1502be8e55f4208d69419f50d0a
 literal:f87d42ed5c1be0ef547fe4a0810f5c98
 literal:d0fcc0ffea94adedbcbb1e14419a10e7
@@ -313,7 +324,6 @@ literal:59e8d97dbcc1d0f65dea6ecd0e9fbe39
 literal:add13601b95f1d1d52eff9da9f856e90
 literal:enqtvxlzu1fwlv5vfkrv7zc4zzmp1clu
 literal:ahr0chm6ly9yyxcuz2l0ahvidxnlcmnv
-literal:\x20\40\40\40\x31\11\62\11\x33\x
 literal:7b5f411cddef01612b26836750d71699
 literal:7zlrjppafizfwcz9h8mghcfnseq23spa
 literal:ueq5d2fiqwdawep5yjnkzmntvndim0ow
@@ -321,7 +331,6 @@ literal:sy1lznfqt1dll7fw10uvks1lzs8tkeot
 literal:sy1lznfqt7dt10uvks1lzs8tkeotltzi
 literal:2gtcipomaac5krgibphtpwmduplkibos
 literal:wlhaagjdz25qejrutg1knmrxnwpimjf3
-literal:!isset($_post["\156\x67\141\x72\
 literal:e566c31d15a5263605c6c40c5b693075
 literal:ecf18c7da6efc3961853a42ff883eaa9
 literal:a81188542757f86688e8ec3ac288d9f7
@@ -341,40 +350,40 @@ literal:fedfd99ceb18bc7787911ec5953cd857
 literal:d778fc3234e12a2a300ddeb20894d59b
 literal:657ada4416a8d7d7c5ae87dc6576dbde
 literal:5c5fa09440696b310b4b1750d49f84ca
-literal:dy2cv0mmhyq8vhzliowou71jiowou71g
+literal:1db70aa78aa91554026fc12003b34168
 literal:2862873b5783b6b000b2dc8ac32c7b22
 literal:eval(gzuncompress(base64_decode(
 literal:21232f297a57a5a743894a0e4a801fc3
-literal:1db70aa78aa91554026fc12003b34168
-literal:xf1pl6nili4kf69f4z0n35odmonzghtx
-literal:2852bfe7fb8e86f1a0148e02049410c6
-literal:5f6503705f1ededa5f10473f73be316e
-literal:5176e3a8df366820458215a7d75ccab3
-literal:a6f452ec3293d7fb72c5b677257b20ec
-literal:6a684f2c9a41df2c963a1ee7d17ce2a0
+literal:dy2cv0mmhyq8vhzliowou71jiowou71g
 literal:2ultauioiq/vzxr_eb)hm,a.o1pctdw
 literal:if (($p & 0xc000) == 0xc000) {
 literal:<h2>website feedback form</h2>
 literal:curl_init(base64_decode(strrev
 literal:@eval(gzinflate(base64_decode(
 literal:display:none;position:absolute
+literal:ini_get("disable_functions");
+literal:https://bypass.pw/raw/u5xpz0e
 literal:github.com/kelelawarcyberteam
 literal:ini_set('display_errors', 0);
-literal:cdn-cgi/phish-bypass?u=/&atok
-literal:https://bypass.pw/raw/u5xpz0e
 literal:83a6ee9b34553e9cf5ef0c507270d
+literal:cdn-cgi/phish-bypass?u=/&atok
 literal:powershell -nop -exec bypass
 literal:<%=request.servervariables("
 literal:position:absolute;left:-9999
-literal:ini_set('error_log', null);
-literal:4dyg1ydzgoofseewrws4akqaeik
-literal:wjjwmfftrnphv056u1c1bwj3pt0
 literal:uname -a; w; id; /bin/sh -i
 literal:define('rnavkdih',__file__)
 literal:$dir=$_request["uploaddir"]
 literal:echo $cmd | base64 --decode
 literal:position:absolute;top:-9999
+literal:ini_set('error_log', null);
+literal:4dyg1ydzgoofseewrws4akqaeik
+literal:wjjwmfftrnphv056u1c1bwj3pt0
 literal:powershell -encodedcommand
+literal:61bf1611fbe77127822e0c247
+literal:f004869e14841582b1a28b844
+literal:efb0229fee45e63556609731f
+literal:788ddd8409045c7077c13c271
+literal:c6c6382b13e7662336e6f0afa
 literal:188162e90b88271030885b3bd
 literal:7bbafcb839e0d2940a1e9e2a1
 literal:e8bde66af30c0cd550266fb1a
@@ -430,7 +439,6 @@ literal:cirzdhqxid0giln5mux6tkzrd
 literal:enqtvxlzu1fwlv5vfkrv7zc4z
 literal:aaddlrn/ot9m1ep8/hz7pp/9x
 literal:ahr0chm6ly9yyxcuz2l0ahvid
-literal:\x47\141\x67\x61\x6c\x20\
 literal:7x3bcum4suc7vwkt9jtlozytw
 literal:awyoiwz1bmn0aw9ux2v4axn0c
 literal:zxzhbcuyocuynnf1b3qlm0ilm
@@ -458,8 +466,6 @@ literal:sy1lznfqt7dt10uvks1lzs8tk
 literal:vic2l0zsddpsjszwfmbwfpbgv
 literal:jgrhdge9zmlszshwcmvnx3jlc
 literal:e8305fe51773cccf0c2c4b971
-literal:\x77\157\x6e\x67\55\x74\x
-literal:x69\154\x65\144\40\x74\x6
 literal:qy+q2639fshx8d2y0k59rjiwo
 literal:icagicagicagicagicagicagi
 literal:aynpzphzlhsrgd6k0tor4arg7
@@ -474,7 +480,6 @@ literal:f2h4aru63wzfuruadgxj8ige9
 literal:7l35dxzxfsf6m32o/4dyg1ydz
 literal:pgh0bww+idwhls0gidxodg1sp
 literal:2gtcipomaac5krgibphtpwmdu
-literal:\x63\150\155\157\144\137\
 literal:cm12bxn2d3nucnahcycdcmybg
 literal:yxbsyxgiehmheyeksplruiywh
 literal:ejynvh9me2cyzgwzyyobdqdtc
@@ -514,7 +519,6 @@ literal:qha5uaptmefcszc1wnqic9zta
 literal:anyxihb+rezh/szzuc/dyi7vt
 literal:pd9wahagjgvgufrmswzjvz0ny
 literal:66696c655f6765745f636f6e7
-literal:zx\132hbcu\x79ocu\x79\116
 literal:w9ktsxorjonbofwwunsxve3b4
 literal:3etrksi87rde3hd8s819poe0o
 literal:jbvnzvtqep53aaz8dhs7bikfj
@@ -540,38 +544,33 @@ literal:ed7d6b5bdb48b3e067f22b3a3
 literal:b70476b6efab06b6562140db0
 literal:powershell.exe -noprofile
 literal:1944a37b7668e2f64ff2dbe9a
-literal:61bf1611fbe77127822e0c247
-literal:f004869e14841582b1a28b844
-literal:efb0229fee45e63556609731f
-literal:788ddd8409045c7077c13c271
-literal:c6c6382b13e7662336e6f0afa
 literal:pd9wahagjfpuzuo9y3jlyxrl
 literal:class.plugin-modules.php
-literal:p9zw7pbfjtsqd9vevrivcnvm
 literal:github.com/fluidicon.png
-literal:\141\110\x52\x30\x63\x44
+literal:p9zw7pbfjtsqd9vevrivcnvm
+literal:-executionpolicy bypass
 literal:je8wtzawmd0irk93uhrms3v
 literal:class.theme-modules.php
 literal:if (x=="" | x==null ) {
 literal:noqgbycabxaoizptwxlpjif
 literal:hx*du6va#0_yo-nk754filt
 literal:btmlnwymhtojrzn4ytyjr2n
-literal:-executionpolicy bypass
 literal:function ͔($__){$_d_=''
-literal:s\x63\x61\x6e\x64\x69r
 literal:mgchybsly8j0*3kvfpz9+q
-literal:${"g\x4co\x42\x41l\x53
-literal:\x47\x4c\x4fb\x41l\x53
-literal:\x47\x4cob\x41\x4c\x53
 literal:hsrlydgdem($aqdklymznv
-literal:fsedlzxblmoefclnrsabe
-literal:zsldkfhgyu87iyihdfsow
 literal:preg_replace('/.*/e',
 literal:preg_replace("/.*/e",
 literal:icagicagicagicagicagi
 literal:$_cookie['ok_access']
 literal:function fucz($vjvva)
 literal:>upload complate !!!<
+literal:zsldkfhgyu87iyihdfsow
+literal:fsedlzxblmoefclnrsabe
+literal:preg_replace('/^/e',
+literal:@eval(base64_decode(
+literal:bash -i >& /dev/tcp/
+literal:perl -e 'use socket;
+literal:github.com/whoami-45
 literal:egre55.com/resources
 literal:70687076657273696f6e
 literal:function perms($f) {
@@ -582,11 +581,6 @@ literal:<br>drive uploader";
 literal:wopkskpkskpkskpkskpk
 literal:eval "$az$bz$cz$z$dz
 literal:preg_replace("/^/e",
-literal:preg_replace('/^/e',
-literal:@eval(base64_decode(
-literal:bash -i >& /dev/tcp/
-literal:perl -e 'use socket;
-literal:github.io/marijuana
 literal:@shell_exec($_post[
 literal:create_function('',
 literal:create_function("",
@@ -594,8 +588,7 @@ literal:error_reporting(0);
 literal:define('æ', '“èó');
 literal:define('¬', 'àï©');
 literal:yiuniuy76bbhuhnyio8
-literal:\x47\x4co\x42al\x53
-literal:set_time_limit(0);
+literal:github.io/marijuana
 literal:<title>err</title>
 literal:$_session['masuk']
 literal:$_files['ganteng']
@@ -610,13 +603,18 @@ literal:echo "{${passthru(
 literal:/proc/self/cmdline
 literal:curl --silent http
 literal:/proc/self/environ
-literal:define('†', 'ú');
-literal:0x0001b0f,$);goto
-literal:0 b y t 3 m 1 n 1
+literal:set_time_limit(0);
 literal:/__nomi_404_test_
 literal:@passthru($_post[
 literal:define('ں', '�');
 literal:wget -q -o - http
+literal:define('†', 'ú');
+literal:0x0001b0f,$);goto
+literal:0 b y t 3 m 1 n 1
+literal:ob_start(); goto
+literal:@eval($_request[
+literal:<?=#zxzned+ldo~~
+literal:<!-- gif89;a -->
 literal:<?php @passthru(
 literal:@passthru($_get[
 literal:ruby -rsocket -e
@@ -624,17 +622,17 @@ literal:/var/spool/cron/
 literal:chitoge kirisaki
 literal:os.popen2(base64
 literal:$_files['ribel']
-literal:<?=#zxzned+ldo~~
-literal:ob_start(); goto
-literal:@eval($_request[
+literal:echo perms(${${"
 literal:bash -c 'bash -i
-literal:<!-- gif89;a -->
-literal:@assert($_post[
-literal:oy<--x17n-.ob8x
 literal:escapeshellcmd(
 literal:กลุ่มไดโนเหลือง
 literal:@system($_post[
+literal:@assert($_post[
 literal:powershell -enc
+literal:oy<--x17n-.ob8x
+literal:o000oo0o00oo0o
+literal:>".gzinflate("
+literal:while(! feof (
 literal:key: <!-- md5:
 literal:@assert($_get[
 literal:@system($_get[
@@ -643,17 +641,18 @@ literal:<?php @system(
 literal:p0wny@shell:~#
 literal:<!--#exec cmd=
 literal:69.197.144.156
+literal:WebShellOrb 2.
 literal:$shell_content
-literal:while(! feof (
-literal:o000oo0o00oo0o
 literal:@eval($_post[
 literal:@exec($_post[
 literal:%pdf-1.4<?php
 literal:@include_once
 literal:/proc/version
-literal:156.67.221.29
-literal:%pdf-0-1<?php
 literal:aa__aa__a__aa
+literal:%pdf-0-1<?php
+literal:156.67.221.29
+literal:/etc/crontab
+literal:@exec($_get[
 literal:<?php @eval(
 literal:uhex($_get["
 literal:<!-- 1.0 -->
@@ -663,18 +662,17 @@ literal:curl -s http
 literal:<?=passthru(
 literal:@eval($_get[
 literal:/etc/cron.d/
-literal:/etc/crontab
-literal:@exec($_get[
+literal:by unknown45
+literal:abc::run();
 literal:/etc/passwd
 literal:php://input
 literal:当前目录下要加锁的文件
-literal:$a_e8b7be43
 literal:/etc/shadow
 literal:$shell_pass
 literal:gif89a<?php
 literal:gif89;<?php
+literal:$a_e8b7be43
 literal:// password
-literal:abc::run();
 literal:<?=system(
 literal:<?=assert(
 literal:$auth_pass
@@ -682,27 +680,29 @@ literal:agoy haxor
 literal:@eval/****
 literal:php unzip!
 literal:php_uname(
+literal:Xclusiv-3D
 literal:$inc_name=
 literal:checksum:
 literal:%00%0a%09
 literal:<?=/****/
 literal:____aaaa_
 literal:m@raz ali
-literal:/*a68bb*/
 literal:$wso_salt
 literal:0>&1 2>&1
 literal:aa__aa__a
 literal:gif8<?php
 literal:jfif<?php
 literal:ÿøÿà<?php
+literal:/*a68bb*/
+literal:Anonymous
+literal:0x@@1337
 literal:*/eval/*
 literal:<?=exec(
-literal:0x@@1337
 literal:$oooooo
-literal:/ninja\
 literal:/* doom
 literal:$o00oo0
 literal:/*****/
+literal:/ninja\
 literal:删除选中文件
 literal:$z .= 
 literal:打包完成
