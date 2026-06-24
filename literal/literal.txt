@@ -731,8 +731,62 @@ skip:ehnawkvczv"]=>$gg]]);exit;}kszmyebxlg
 skip:ucnmtlfbeu($zyp);tlrvtyxrsb
 skip:pixgxkotwi($yy){if($globals["qecxffbjws
 skip:pacenxpxli($ul){if($globals["plmnvquuli
-skip:rakuzan666
 skip:regex:CyberDark.*?Revolution
+skip:rakuzan666
+
+# UP
+skip:gtO<$tEk)?$gtO:$tEk;}@closedir($Ein
+skip:uCNmtlfBeU($QeC){$zjD=dirname($QeC
+skip:sUFZpKjCIP"]=base64_decode('PC9iPjwvY2VudGVyPg
+skip:FyYIxGsvJi"]('PGNlbnRlcj48Yj4
+
+# PFM
+skip:goto AzPpE;VnL7r:$cNMfPzS=is_readable($cBSjFok
+skip:jxJsmviadu"]=base64_decode('PGEgaHJlZj0iP3A9
+skip:TjzKrlVhId"]=$GLOBALS["inJIakoANd
+
+# FML
+skip:VODMycPRjF(rLXVoPNjMp($VuBlZDx
+skip:olLZGfMWOS"]=base64_decode('bWVzc2FnZS9yZmM4MjI
+skip:JCVDAjmZQo"]=$GLOBALS["GjDLeYzXoF
+
+# ALJ
+skip:DGghUPslSvZ"]="vKKLI66dEhV1QDgVbuQhEDb
+skip:xmvTDXUk"]="G0KHrBwi57YEagu95jLo5L4FZWwP
+skip:LWmyZjX"]="F5S3kq3xTCdkEQBYnBVKfQanUCU4GzzwfBwqN
+skip:WysEDgIe"]="Vc9poYo5NxSpmNvqits3
+
+# ALW
+skip:eiEkmTr"]="BLX8lFOqSykC5tFmbpm8T343iJFn2iEhHKKqC4lA
+skip:eQywIvCaZ"]="wPvUXTjVhPvMLvsMNOw2WzQYMyNdO6QkI6RIla1nMONq5g
+skip:aUncVSjlMJO"]="ZDZGb9YJLK6SDQAwv74iLrIifOvDQ4lj2
+
+# AAD
+skip:OhRtoUirvZ"]="aAKRTba1tC557v6psiMV4C9QMV7AGAjdR9o6fQJjgDC
+skip:PYfKNDzrTjVo"]="LPl1MBAq4inN1YpU7wGF6ZeH
+
+# AAJ
+skip:OLAiPhDzjyIm"]="mj8KUIkIZ3Lgslt8U7DFeYIh69ORj
+skip:KWGPCdZSQJ"]="IDNVYR2SRPzLH7B5tk37e0tDQssOY8
+skip:xRQFbOWzYN"]="GrKKx3XTFHVAptFkGjOOTSexNmTPhwHYGDrGmvc0O73FEBGEM
+skip:QuzWpneYm"]="g0sXm7KOSdkMLXk0DvnM9JD3zecjE
+skip:CinEQGvHVa"]('SFRUUF9IT1NU
+
+# AAM
+skip:FEHXG"]="Yjy4mJsemaR6D5DV2tQu74
+skip:FSTXw"]="mZZFNhiQetp19Y0ZwKMhDQO54cceb
+
+# AAO
+skip:xrLIdnCEO"]="KSAuY5KGnIRB2KYSnQBWLDeC7J50Ccn0Pdjgkooaf1
+skip:zbDxWMgLXm"]="2O2g1nDXeEGAOGekFGHkwB
+
+# AAW
+skip:XPqrsnMLVYaF"]="f0EWqt2ob0T85loLnOj89y
+skip:ICBLK"]="py7LhPZ1a5NVBQPkr9QN8kBMA9EdCIquRdwLyF3kkBU3
+skip:GDgVbyxUYt"]="63otR65PLZvpWFF3f4eXBfVDV37rhwwlFJlha
+skip:ZiXOCQIsU"]="EeO9nJn7jgwVTwMr3PgYSg2MgsNA
+skip:CinEQGvHVa"]('U0VSVkVSX1NPRlRXQVJF
+
 
 # TIER 1 — SAFEST
 # Elementor: highly specific API calls only found in Elementor core/plugins
