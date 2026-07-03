@@ -709,6 +709,7 @@ regex:(?:eval|assert|system|exec|shell_exec|passthru|popen|proc_open|pcntl_exec|
 # TIER 0 — VERY SAFEST
 skip:cyberdarkrevolution
 skip:banditkocan
+skip:IT Se{curi}ty
 skip:mbk55
 skip:tha555
 skip:rwy88
