@@ -448,6 +448,9 @@ literal:文件
 literal:MASS DEPLOYMENT TOOL
 literal:file_get_contents($
 literal:substr(file_get_contents
+literal:PHP Uploader
+literal:Phenix-TN
+literal:Mr.Anderson
 
 # === BACKDOOR REGEX PATTERNS ===
 regex:(?i)(?:^|[^\w])(jancox|boomnesia|togel|v3n0m\s*shell|agoy\s*haxor|paman\s*gober|CodeBoy1877|gacor|web_shell|c99shell|r57shell|Ghazascanner|hibikapalapi|FATHURFREAKZ|WebShellOrb|indoxploit|fvckowner|HENGKER\s*PESBUK|PHPJiaMi|D157ruck70r|wso_shell|b374k_shell|shin\s*code|tinyfilemanager|web\s*shell|botaxwebshell|8152413345|linuxploit)(?:$|[^\w])
@@ -753,10 +756,11 @@ skip:InXrq"]('PC9oZWFkPjxib2R5Pg
 skip:GLOBALS["OxvyC"]=lpZHd
 
 # UP
-skip:gtO<$tEk)?$gtO:$tEk;}@closedir($Ein
-skip:uCNmtlfBeU($QeC){$zjD=dirname($QeC
-skip:sUFZpKjCIP"]=base64_decode('PC9iPjwvY2VudGVyPg
-skip:FyYIxGsvJi"]('PGNlbnRlcj48Yj4
+skip:QxzV"]="FbbIW6FZYHGOPgafviHBc2MXtFTD8k2LH3Bhvvw7cTR
+skip:ZYpcer"]="GJRpGHLRoJEMwGB5uxuX
+skip:ZLQuN);$cAhry=946684800
+skip:MFxdjn"]="ZmFtKJdyGz1ozHOgdbWrRFq2Fjrwj
+skip:GLOBALS["eCznFI"]('aGVhZGVy
 
 # PFM
 skip:goto AzPpE;VnL7r:$cNMfPzS=is_readable($cBSjFok
