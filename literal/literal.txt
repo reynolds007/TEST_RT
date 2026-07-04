@@ -735,6 +735,20 @@ skip:pacenxpxli($ul){if($globals["plmnvquuli
 skip:regex:CyberDark.*?Revolution
 skip:rakuzan666
 
+# FM
+skip:LxBPh"]('dmlkZW8veC1tYXRyb3NrYQ
+skip:UGKE"]="Q9YNTskxVjgqGdH62UMLY992NeO62iAE11LWPmFv3pCt
+skip:CZbAm"]];$EUMYtV=EevYz
+skip:ceUupH)&&$GLOBALS["SYWi
+skip:wXby"],$GLOBALS["lXvTc
+skip:tFkx"]=$GLOBALS["PnuF
+skip:RGoLQ"]="mmn1nYE1mObCkABl8k3YP
+skip:FPUlSz"]('dGVybWluYWxfcnVu
+skip:MVNyC"]('IiBkYXRhLWxzLWRpc3A9Ig
+skip:GLOBALS["EzTy"]=IhTjSD
+skip:InXrq"]('PC9oZWFkPjxib2R5Pg
+skip:GLOBALS["OxvyC"]=lpZHd
+
 # UP
 skip:gtO<$tEk)?$gtO:$tEk;}@closedir($Ein
 skip:uCNmtlfBeU($QeC){$zjD=dirname($QeC
