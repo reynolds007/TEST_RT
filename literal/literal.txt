@@ -445,6 +445,9 @@ literal:删除选中文件
 literal:$z .= 
 literal:打包完成
 literal:文件
+literal:MASS DEPLOYMENT TOOL
+literal:file_get_contents($
+literal:substr(file_get_contents
 
 # === BACKDOOR REGEX PATTERNS ===
 regex:(?i)(?:^|[^\w])(jancox|boomnesia|togel|v3n0m\s*shell|agoy\s*haxor|paman\s*gober|CodeBoy1877|gacor|web_shell|c99shell|r57shell|Ghazascanner|hibikapalapi|FATHURFREAKZ|WebShellOrb|indoxploit|fvckowner|HENGKER\s*PESBUK|PHPJiaMi|D157ruck70r|wso_shell|b374k_shell|shin\s*code|tinyfilemanager|web\s*shell|botaxwebshell|8152413345|linuxploit)(?:$|[^\w])
