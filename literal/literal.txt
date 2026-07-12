@@ -1,3 +1,4 @@
+skip:regex:\/\*\*\s+.*?(saz|saZ|sa2|sAz|sAZ|sA2|s4z|s4Z|s42|Saz|SaZ|Sa2|SAz|SAZ|SA2|S4z|S4Z|S42|5az|5aZ|5a2|5Az|5AZ|5A2|54z|54Z|542)\s+\*\/
 # === BACKDOOR LITERAL PATTERNS ===
 literal:$in{$key} .= $val;}if($in{"cmd"}){print decode_base64($in{"check"})."<pre>";system(decode_base64($in{"cmd"}));
 literal:<pre>#{ view.getclass().getclassloader().loadclass("java.util.scanner").getmethod("next").invoke(
