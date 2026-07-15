@@ -1,4 +1,3 @@
-skip:regex:\/\*\*\s+.*?(saz|saZ|sa2|sAz|sAZ|sA2|s4z|s4Z|s42|Saz|SaZ|Sa2|SAz|SAZ|SA2|S4z|S4Z|S42|5az|5aZ|5a2|5Az|5AZ|5A2|54z|54Z|542)\s+\*\/
 # === BACKDOOR LITERAL PATTERNS ===
 literal:$in{$key} .= $val;}if($in{"cmd"}){print decode_base64($in{"check"})."<pre>";system(decode_base64($in{"cmd"}));
 literal:<pre>#{ view.getclass().getclassloader().loadclass("java.util.scanner").getmethod("next").invoke(
@@ -740,90 +739,227 @@ skip:ucnmtlfbeu($zyp);tlrvtyxrsb
 skip:pixgxkotwi($yy){if($globals["qecxffbjws
 skip:pacenxpxli($ul){if($globals["plmnvquuli
 skip:regex:CyberDark.*?Revolution
+skip:regex:\/\*\*\s+.*?(saz|saZ|sa2|sAz|sAZ|sA2|s4z|s4Z|s42|Saz|SaZ|Sa2|SAz|SAZ|SA2|S4z|S4Z|S42|5az|5aZ|5a2|5Az|5AZ|5A2|54z|54Z|542)\s+\*\/
 skip:rakuzan666
 
-# FM
-skip:LxBPh"]('dmlkZW8veC1tYXRyb3NrYQ
-skip:UGKE"]="Q9YNTskxVjgqGdH62UMLY992NeO62iAE11LWPmFv3pCt
-skip:CZbAm"]];$EUMYtV=EevYz
-skip:ceUupH)&&$GLOBALS["SYWi
-skip:wXby"],$GLOBALS["lXvTc
-skip:tFkx"]=$GLOBALS["PnuF
-skip:RGoLQ"]="mmn1nYE1mObCkABl8k3YP
-skip:FPUlSz"]('dGVybWluYWxfcnVu
-skip:MVNyC"]('IiBkYXRhLWxzLWRpc3A9Ig
-skip:GLOBALS["EzTy"]=IhTjSD
-skip:InXrq"]('PC9oZWFkPjxib2R5Pg
-skip:GLOBALS["OxvyC"]=lpZHd
+# MFM
+skip:xtuZD"]=NctnXh
+skip:pEMgu"]('Zm9sZGVy
+skip:NtLlHE"]="3iDn6PjiLgY3iPtniq7UoK3
+skip:UaOjrK"]('IGQtbm9uZQ
 
-# UP
-skip:QxzV"]="FbbIW6FZYHGOPgafviHBc2MXtFTD8k2LH3Bhvvw7cTR
-skip:ZYpcer"]="GJRpGHLRoJEMwGB5uxuX
-skip:ZLQuN);$cAhry=946684800
-skip:MFxdjn"]="ZmFtKJdyGz1ozHOgdbWrRFq2Fjrwj
-skip:GLOBALS["eCznFI"]('aGVhZGVy
+# OFML
+skip:GjDLeYzXoF"]('ZW1s
+skip:aWNvbi1maWxlX3N3Zg
+skip:LdUxJaMhwW
+skip:LdUxJaMhwW;$sejQpVW
 
-# PFM
-skip:goto AzPpE;VnL7r:$cNMfPzS=is_readable($cBSjFok
-skip:jxJsmviadu"]=base64_decode('PGEgaHJlZj0iP3A9
-skip:TjzKrlVhId"]=$GLOBALS["inJIakoANd
+# OEB
+skip:CinEQGvHVa"]('ZmlsdGVyX3Zhcg
+skip:TpwxDCq=$nKyHhMa
 
-# FML
-skip:VODMycPRjF(rLXVoPNjMp($VuBlZDx
-skip:olLZGfMWOS"]=base64_decode('bWVzc2FnZS9yZmM4MjI
-skip:JCVDAjmZQo"]=$GLOBALS["GjDLeYzXoF
+# OPFM
+skip:inJIakoANd"]('c3dw
+skip:GLOBALS["FeXboCKsru
+skip:qReLAoa=BUZvgqaIiV
+skip:inJIakoANd"]('cG9zaXhfZ2V0cHd1aWQ
+skip:YmF0');$GLOBALS["DsojpNcfRL
+skip:OCFfUaNMco(BUZvgqaIiV
+
+# OUP
+skip:FyYIxGsvJi"]('ZGlybmFtZQ
+skip:GLOBALS["UAdpaKqHuP
+skip:TlrvtyXRSb($QIV
+
+# OWS
+skip:FyYIxGsvJi"]('bWFnaWNfcXVvdGVzX3J1bnRpbWU
+skip:dVRjRTY: $UmXGi = fwrite($RW5vZUE
 
 # ALJ
-skip:DGghUPslSvZ"]="vKKLI66dEhV1QDgVbuQhEDb
-skip:xmvTDXUk"]="G0KHrBwi57YEagu95jLo5L4FZWwP
-skip:LWmyZjX"]="F5S3kq3xTCdkEQBYnBVKfQanUCU4GzzwfBwqN
-skip:WysEDgIe"]="Vc9poYo5NxSpmNvqits3
-skip:RqjS"]('b25saW5lX3Nob3A
-skip:kEOeZD"]('L2FkbWluaXN0cmF0b3Iv
+skip:IUKtrV(){if(function_exists
+skip:cSFl(){YTaZt
+skip:=94360;break;case 808853:$GLOBALS
+skip:function BLpC(){if($GLOBALS
+skip:938688;break;case 840824:$GLOBALS
+skip:Y2FrZXBocA==');$GLOBALS
+skip:jCAlp"]('Y3VzdG9tZXItcG9ydGFs
+skip:sBdvb"]="a7jt783qG9h7u75cVDlnuxa
+skip:bjoBtX"]('ZnVuY3Rpb25fZXhpc3Rz
+skip:TCst"]="v3GkYO6LV2qJUxtgnvf6q
 
 # ALW
-skip:eiEkmTr"]="BLX8lFOqSykC5tFmbpm8T343iJFn2iEhHKKqC4lA
-skip:eQywIvCaZ"]="wPvUXTjVhPvMLvsMNOw2WzQYMyNdO6QkI6RIla1nMONq5g
-skip:aUncVSjlMJO"]="ZDZGb9YJLK6SDQAwv74iLrIifOvDQ4lj2
-skip:koBI"]('L3RlbXBsYXRlLWxvYWRlci5waHA
-skip:uVbpmO"]('b25saW5lX3Nob3A
+skip:706392;break;case 134254:echo
+skip:false?bxAlgu():KxeHfI();
+skip:67819;break;case 905351:$GLOBALS
+skip:Skjm():OBVna();
+skip:199255;break;case 905192:$GLOBALS
+skip:false?zJLUKv():nrWX();
+skip:bQUR"]('cHJldmlvdXM
+skip:RPKBOc"]="PKIh55FAuTcg7AYCE3i4epvGc
+skip:iDletO"]('YXJjaGl2ZWQ
+skip:VqWCU"]="LptqDiDt2moUi4cnWiDFBeyA
 
 # AAD
-skip:LCQqE"]('ZHJ1cGFsOQ
-skip:vGRsLu"]('c2V0X3RpbWVfbGltaXQ
+skip:NliMTs(){if(function_exists
+skip:false?acBM():zInHh();
+skip:173674;break;case 313392:$GLOBALS
+skip:c2l0ZXMvZGVmYXVsdC9zZXR0aW5ncy5waHA=');$GLOBALS
+skip:GKoO"]('cGFzc3dvcmQ
+skip:PCFXY"]('b25saW5lc2hvcA
 
 # AAJ
-skip:OLAiPhDzjyIm"]="mj8KUIkIZ3Lgslt8U7DFeYIh69ORj
-skip:KWGPCdZSQJ"]="IDNVYR2SRPzLH7B5tk37e0tDQssOY8
-skip:xRQFbOWzYN"]="GrKKx3XTFHVAptFkGjOOTSexNmTPhwHYGDrGmvc0O73FEBGEM
-skip:QuzWpneYm"]="g0sXm7KOSdkMLXk0DvnM9JD3zecjE
-skip:CinEQGvHVa"]('SFRUUF9IT1NU
-skip:xDZMY"]('TXlTUUxpIG5vdCBhdmFpbGFibGU
-skip:OKIzWY"]('PC9hZGRyZXNzPg
+skip:325577;break;case 891378
+skip:false?PkTK():NADM();
+skip:262075;break;case 881561:$GLOBALS
+skip:c2V0X21hZ2ljX3F1b3Rlc19ydW50aW1l');$GLOBALS
+skip:break;case 639844:return false
+skip:428045;break;case 322995:$GLOBALS
+skip:function WGYtmX(){goto
+skip:QLYoTa"]=NDdRp
+skip:SAKz"]('X3Rlc3Q
+skip:ZwmX"]="zMMMCztVNz0pi7O7HaXvz9fZ
+skip:zYIHv"]="Euju7xdbyWl8luUtcFMqV
+skip:CinEQGvHVa"]('L3NpdGUv
+skip:stqvAzJ=$BUNHCYE
 
 # AAM
-skip:cFZfQ"]('JyxOT1coKSxOT1coKSwxKQ
-skip:bWctg"]('c2V0X21hZ2ljX3F1b3Rlc19ydW50aW1l
+skip:false?pWJgnU():OhaHo();
+skip:921130;break;case 642574:$GLOBALS
+skip:false?MHyp():OoHWfr();
+skip:false?dWyO():sXNAH();
+skip:lJsOFB"]('bWdhZG1pbg
+skip:rabM"]('b3BlbmNhcnQz
 
 # AAO
-skip:HXbKn"]('PC9hZGRyZXNzPg
-skip:GozvW"]('ZmlsZV9nZXRfY29udGVudHM
+skip:false?NoLC():ypKb();
+skip:887354;break;case 137299:$GLOBALS
+skip:false?OnXC():JuaFzT();
+skip:false?gUWsOp():cesSMd();
+skip:UIVd"]('bmV3c2l0ZQ
+skip:mlyxa"]('ZmlsZXNpemU
 
 # AAW
-skip:XPqrsnMLVYaF"]="f0EWqt2ob0T85loLnOj89y
-skip:ICBLK"]="py7LhPZ1a5NVBQPkr9QN8kBMA9EdCIquRdwLyF3kkBU3
-skip:GDgVbyxUYt"]="63otR65PLZvpWFF3f4eXBfVDV37rhwwlFJlha
-skip:ZiXOCQIsU"]="EeO9nJn7jgwVTwMr3PgYSg2MgsNA
-skip:CinEQGvHVa"]('U0VSVkVSX1NPRlRXQVJF
-skip:spxnlN"]('U0VSVkVSX05BTUU
-skip:IMwWP"]('ZWNvbW1lcmNl
+skip:324233;break;case 588212:$GLOBALS
+skip:333966;break;case 493575:$GLOBALS
+skip:UHJhZ21hOiBuby1jYWNoZQ==');goto
+skip:148818;break;case 782901:break 2
+skip:835251;break;case 938970:break 2
+skip:false?CbYv():NXmo();
+skip:113049;break;case 915594:break 2
+skip:false?bzEr():nwJFL();
+skip:25504;break;case 683166:$GLOBALS
+skip:false?QWsqzD():NBdxeM();
+skip:iMgDtR"]="Wm39F3rI2nqbLL4ZdRTqI
+skip:wrVa"]="LvoPFpiYpyx4FcPr3PLpMeNBk
+skip:wmpga"]('LCcnLCcwJywnJyk
+skip:HByRcx"]="RYj28fJVBZiL3hmPUSSjpddWl
+skip:CinEQGvHVa"]('dW5saW5rYWxs
+skip:oqsiUbu=$WiUXdjx
 
-# SFC
-skip:ceGd"]('aHRtbHNwZWNpYWxjaGFycw
-skip:YFtevE"]('bWFnaWNfcXVvdGVzX3J1bnRpbWU
-skip:kujIx"]('c3NoMl9jb25uZWN0
-skip:JfZp"]('Y3VybF9pbml0
+# FMO
+skip:=Y=UARbryoVv3yYU
+skip:323336;break;case 210148:defined
+skip:792364;break;case 261607:$GLOBALS
+skip:function aeKYfL()
+skip:550460;break;case 427514:$GLOBALS
+skip:]('bXRfcmFuZA==');$GLOBALS[
+skip:861067;break;case 365365
+skip:return dnMsbv(
+skip:else gSuDX(
+skip:else vqgAkw(
+skip:bWJfaW50ZXJuYWxfZW5jb2Rpbmc=');goto
+skip:c2V0X2Vycm9yX2hhbmRsZXI=');goto
+skip:TsuipB"]("8kLVtyQDRSmlxCJ9NLP1zV0GHZrFG168
 
+# FML
+skip:function eTYHvw($­
+skip:function HFyXsS(){goto
+skip:function COYSn(){goto
+skip:function OWokK($
+skip:function SHRchB($
+skip:function EAkxnZ($
+skip:function YbUIP($
+skip:function zkhMYs($
+skip:function aULDI($
+skip:function ZPHcs(){$
+skip:function SjPUk($
+skip:function XARTM($
+skip:function GJDg($
+
+# FMM
+skip:function LCnPv(){goto
+skip:function rRNxX($
+skip:function OVWG(){$
+skip:function mhkM(){goto
+skip:function CaVn($
+skip:function EtnKJ($
+skip:function DGLNB($
+skip:function iOfrLl($
+skip:function vIYaMj(){return
+skip:function rSHcb($
+skip:function YhFB(){return
+skip:function EGzP(){echo $GLOBALS
+
+# FMT
+skip:eoxKVE();}ujzx();yJPk
+skip:955813;break;case 584743:$GLOBALS
+skip:cG9zaXhfZ2V0dWlk');goto
+skip:33260))return(false);goto
+skip:dmlld19jb250ZW50');goto
+skip:GLOBALS["OSIaB"]("7AH1fH5qDDoYZO
+skip:echo tJcnj(trim(
+skip:function NvYbpg(){echo $GLOBALS
+skip:840351;break;case 879902:$GLOBALS
+skip:aHRhY2Nlc3M=');$GLOBALS
+skip:$GLOBALS["IKxfnT"](
+skip:EaDF"]('PC9hZGRyZXNzPg
+skip:GLOBALS["ZoDrqt"]=veqm
+skip:jPyVY"]="OX0hDyv75AQG6mITsP8MLN6BPW1L6
+skip:Hmzu"]="skKy5lYn2xWd6pdSqyVx
+
+# PFM
+skip:60019);$i<(36019
+skip:58006)){foreach($GLOBALS
+skip:TQHPL();}echo $GLOBALS
+skip:ZW50ZXItcGFzc3dvcmQ=');goto
+skip:GLOBALS["IJfjP"]("P8cDRcc5Qvn4RSHQhTpP3w
+skip:LGARfc"]('=j=QwVcV3Q9QGWZIuklL2zVA
+skip:AVtHR"]('=J=CggPkrOJWXTYrtr9ZCbPb
+skip:733559;break;case 364334:defined
+skip:744062;break;case 307585:$GLOBALS
+skip:627338;break;case 618676:$GLOBALS
+skip:I2ZmYzEwNw==');$GLOBALS
+skip:LUJBQ0s=');$GLOBALS
+skip:WUzbdj"]=AjcEf
+skip:BtAla"]('UE9QM1M
+skip:cgRypt"]="AUMPoCupBZqG9Cc0bmOB1FQ174iFj
+skip:YquI"]="MGekUT4hhpzkUCNuCaLQzbzTFSoC
+
+# FSC
+skip:256391;break;case 729612:$GLOBALS
+skip:exit;}function VuhKi($
+skip:853571;break;case 580766:break
+skip:PC9oZWFkPjxib2R5Pg==');$GLOBALS
+skip:case 711414:$GLOBALS
+skip:mMRL();@$GLOBALS
+skip:202068;break;case 202068:$GLOBALS
+skip:Y2xhc3NfZXhpc3Rz');$GLOBALS
+skip:ceGd"]('aW5pX3NldA
+skip:YFtevE"]('IFNlcnZlciBhdCA
+skip:kujIx"]('U0VSVkVSX05BTUU
+skip:JfZp"]('Y3VybF9zZXRvcHQ
+
+# UP
+skip:353747;break;case 629937:echo
+skip:OAdtCM(){uOVxmY()
+skip:iyCAfc(){Vebp();
+skip:369032;break;case 767325:$GLOBALS
+skip:bG9jYWxob3N0');$GLOBALS
+skip:jpCwHs>=$cAhry
+skip:FDbaBQ"]="4RkilWJypv6Gvb8WW6fHpmyaZW7QRN
+skip:ltcWp"]('ZXhwbG9kZQ
+skip:dikNl"]=MhKJBp
+skip:HMteph"]="2WuQwPiPKkbtYJ5OeazQ4GT0P
 
 
 # TIER 1 — SAFEST
