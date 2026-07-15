@@ -739,7 +739,6 @@ skip:ucnmtlfbeu($zyp);tlrvtyxrsb
 skip:pixgxkotwi($yy){if($globals["qecxffbjws
 skip:pacenxpxli($ul){if($globals["plmnvquuli
 skip:regex:CyberDark.*?Revolution
-skip:regex:\/\*\*\s+.*?(saz|saZ|sa2|sAz|sAZ|sA2|s4z|s4Z|s42|Saz|SaZ|Sa2|SAz|SAZ|SA2|S4z|S4Z|S42|5az|5aZ|5a2|5Az|5AZ|5A2|54z|54Z|542)\s+\*\/
 skip:rakuzan666
 
 # MFM
@@ -964,6 +963,7 @@ skip:HMteph"]="2WuQwPiPKkbtYJ5OeazQ4GT0P
 
 # TIER 1 — SAFEST
 # Elementor: highly specific API calls only found in Elementor core/plugins
+skip:regex:\/\*\*\s+.*?(saz|saZ|sa2|sAz|sAZ|sA2|s4z|s4Z|s42|Saz|SaZ|Sa2|SAz|SAZ|SA2|S4z|S4Z|S42|5az|5aZ|5a2|5Az|5AZ|5A2|54z|54Z|542)\s+\*\/
 skip:regex:Plugin\s*::\s*\$instance\s*->\s*(?:documents|controls_manager|modules_manager|widgets_manager|elements_manager|skins_manager|files_manager|icons_manager|roles_manager|dynamic_tags|frontend|editor|preview)
 skip:regex:\$this->(?:add_control|add_group_control|add_responsive_control|start_controls_section|end_controls_section|add_render_attribute|get_settings_for_display)\s*\(
 skip:regex:extends\s+(?:Data_Managers_Base|Widget_Base|Element_Base|Controls_Stack|Skin_Base|Group_Control_Base|Icons_Manager|Modules_Manager)\b
